@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
-import { BufferGeometryUtils } from 'three';
 
 @Component({
   selector: 'app-male-character',
@@ -14,39 +12,25 @@ export class MaleCharacterComponent {
 
   ngOnInit() : void {
     const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xFFFFFF);
     const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+    // Add ambient light to the scene
+    const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.2); // color, intensity
+    scene.add(ambientLight);
 
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setPixelRatio(window.devicePixelRatio * 2);
     document.body.appendChild( renderer.domElement );
 
-    const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-    const cube = new THREE.Mesh( geometry, material );
-    scene.add( cube );
+    //load the female role gltf model
+    const loader = new GLTFLoader();
+    loader.load('assets/female-role/scene.gltf', (gltf) => {
 
-    // //load the female role gltf model
-    // const loader = new GLTFLoader();
-    // loader.load('assets/female-role/scene.gltf', (gltf) => {
-    //   scene.add(gltf.scene);
-    // }, undefined, (error) => {
-    //   console.error(error);
-    // });
-    const loader = new FBXLoader();
-    loader.load('assets/Ch24_nonPBR.fbx', (fbx) => {
-      // Traverse the object and triangulate each geometry
-      fbx.traverse((child) => {
-        if (child instanceof THREE.Mesh && child.geometry !== undefined) {
-          child.geometry = BufferGeometryUtils.mergeBufferGeometries([child.geometry.toNonIndexed().triangulate()]);
-        }
-      });
-
-      // Merge all the meshes into a single Mesh
-      const meshes = fbx.children.filter(child => child instanceof THREE.Mesh && child.geometry !== undefined);
-      const mergedGeometry = BufferGeometryUtils.mergeBufferGeometries(meshes.map(mesh => mesh.geometry));
-
-
-      scene.add(mergedGeometry);
+      gltf.scene.scale.set(0.3, 0.3, 0.3);
+      gltf.scene.position.set(0, -2, 0);
+      scene.add(gltf.scene);
     }, undefined, (error) => {
       console.error(error);
     });
@@ -55,9 +39,6 @@ export class MaleCharacterComponent {
 
     function animate() {
       requestAnimationFrame( animate );
-
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
 
       renderer.render( scene, camera );
     }
