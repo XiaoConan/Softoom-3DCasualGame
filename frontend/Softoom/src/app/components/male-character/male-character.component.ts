@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
+import { BufferGeometryUtils } from 'three';
 
 @Component({
   selector: 'app-male-character',
@@ -23,6 +24,32 @@ export class MaleCharacterComponent {
     const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
     const cube = new THREE.Mesh( geometry, material );
     scene.add( cube );
+
+    // //load the female role gltf model
+    // const loader = new GLTFLoader();
+    // loader.load('assets/female-role/scene.gltf', (gltf) => {
+    //   scene.add(gltf.scene);
+    // }, undefined, (error) => {
+    //   console.error(error);
+    // });
+    const loader = new FBXLoader();
+    loader.load('assets/Ch24_nonPBR.fbx', (fbx) => {
+      // Traverse the object and triangulate each geometry
+      fbx.traverse((child) => {
+        if (child instanceof THREE.Mesh && child.geometry !== undefined) {
+          child.geometry = BufferGeometryUtils.mergeBufferGeometries([child.geometry.toNonIndexed().triangulate()]);
+        }
+      });
+
+      // Merge all the meshes into a single Mesh
+      const meshes = fbx.children.filter(child => child instanceof THREE.Mesh && child.geometry !== undefined);
+      const mergedGeometry = BufferGeometryUtils.mergeBufferGeometries(meshes.map(mesh => mesh.geometry));
+
+
+      scene.add(mergedGeometry);
+    }, undefined, (error) => {
+      console.error(error);
+    });
 
     camera.position.z = 5;
 
