@@ -25,10 +25,13 @@ export class MaleCharacterComponent {
     document.body.appendChild( renderer.domElement );
 
     //load the female role gltf model
-    const loader = new GLTFLoader();
-    loader.load('assets/female-role/scene.gltf', (gltf) => {
 
-      gltf.scene.scale.set(0.3, 0.3, 0.3);
+    let model: THREE.Group;
+
+    const loader = new GLTFLoader();
+    loader.load('assets/male-role/scene.gltf', (gltf) => {
+      model = gltf.scene;
+      gltf.scene.scale.set(0.2, 0.2, 0.2);
       gltf.scene.position.set(0, -2, 0);
       scene.add(gltf.scene);
     }, undefined, (error) => {
@@ -39,6 +42,9 @@ export class MaleCharacterComponent {
 
     function animate() {
       requestAnimationFrame( animate );
+
+      // Rotate the imported model
+      model.rotation.y += 0.01;
 
       renderer.render( scene, camera );
     }
