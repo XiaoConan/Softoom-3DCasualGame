@@ -1,0 +1,11 @@
+Model Information:
+* title:	Genshin Impact = Traveler
+* source:	https://sketchfab.com/3d-models/genshin-impact-traveler-f555d89878cc489c9f143654ea5f1487
+* author:	archiveblue51121 (https://sketchfab.com/archiveblue51121)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Genshin Impact = Traveler" (https://sketchfab.com/3d-models/genshin-impact-traveler-f555d89878cc489c9f143654ea5f1487) by archiveblue51121 (https://sketchfab.com/archiveblue51121) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
