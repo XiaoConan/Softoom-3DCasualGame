@@ -1,1 +1,51 @@
-<p>sign-up-page works!</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Softoom</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <header>
+      <h1>Softoom</h1>
+    </header>
+
+    <p id="error-box"></p>
+
+    <form class="signup-form col-6">
+      <div class="form-title">User Sign Up</div>
+      <input
+        type="text"
+        name="username"
+        class="form-element"
+        placeholder="Enter a email address"
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        class="form-element"
+        placeholder="Enter a password"
+        required
+      />
+
+      <select id="gender" class="form-element">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+
+      <select id="room-type" class="form-element">
+        <option value="option1">Study</option>
+        <option value="option2">Soft</option>
+        <option value="option3">Play</option>
+      </select>
+      <div>
+        <button id="signup" name="action" class="btn">Sign Up</button>
+      </div>
+    </form>
+
+    <footer>
+      <a href="/credits.html">credits</a>
+    </footer>
+  </body>
+</html>
