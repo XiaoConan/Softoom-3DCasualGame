@@ -1,0 +1,45 @@
+html {
+  overflow: -moz-scrollbars-vertical;
+}
+
+body {
+  background: #efe1ce;
+  font-family: 'Comfortaa', cursive;
+  font-size: 14px;
+  color: #efe1ce;
+  text-align: center;
+  max-width: 100%;
+  margin: auto;
+}
+
+header {
+  background: #c1b3b6;
+  padding: 20px 0;
+  margin-bottom: 20px;
+}
+
+footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.btn {
+  border-radius: 10px;
+  text-align: center;
+  font-family: 'Comfortaa', cursive;
+  font-size: 20px;
+  color: white;
+  background: #c1b3b6;
+  border: 2px solid white;
+  padding: 10px 20px 10px 20px;
+}
+
+.btn:hover {
+  background: #00b7ef;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.hidden {
+  visibility: hidden;
+}

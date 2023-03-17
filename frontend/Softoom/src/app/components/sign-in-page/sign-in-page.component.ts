@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class SignInPageComponent {
 
+  constructor() { }
+
+  ngOnInit(): void {
+
+  }
+
 }

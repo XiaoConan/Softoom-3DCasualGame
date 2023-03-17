@@ -1,0 +1,7 @@
+:host {
+  display: block;
+}
+
+:not(router-outlet) {
+  display: none;
+}
