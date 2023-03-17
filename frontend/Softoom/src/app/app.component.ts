@@ -7,12 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Softoom';
-
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  onRouterLinkClick(event: any) {
-    console.log(event);
-  }
 }
