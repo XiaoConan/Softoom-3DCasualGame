@@ -15,5 +15,4 @@ export class AppComponent {
   onRouterLinkClick(event: any) {
     console.log(event);
   }
-
 }
