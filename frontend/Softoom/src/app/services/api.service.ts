@@ -10,12 +10,20 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   //user sign up
-  signUp(data) {
-    return this.http.post(`${this.endpoint}/users/signup`, data);
+  signUp(username: String, password: String, gender: String, roomType: String) {
+    return this.http.post(`${this.endpoint}/users/signup`, {
+      username,
+      password,
+      gender,
+      roomType
+    });
   }
 
   //user sign in
-  signIn(data) {
-    return this.http.post(`${this.endpoint}/users/signin`, data);
+  signIn(username: String, password: String) {
+    return this.http.post(`${this.endpoint}/users/signin`, {
+      username,
+      password
+    });
   }
 }

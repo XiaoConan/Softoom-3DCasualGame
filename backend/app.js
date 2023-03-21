@@ -13,6 +13,11 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+app.use(function (req, res, next) {
+  console.log("HTTP request", req.method, req.url, req.body);
+  next();
+});
+
 try {
   await sequelize.authenticate();
   await sequelize.sync({ alter: { drop: false } });
@@ -20,6 +25,11 @@ try {
 } catch (error) {
   console.error("Unable to connect to the database:", error);
 }
+
+//user sign up
+app.post("/users/signup", async (req, res) => {
+  return "user sign up";
+});
 
 app.listen(PORT, (err) => {
   if (err) console.log(err);
