@@ -26,7 +26,13 @@ export class SignUpPageComponent implements OnInit {
   ngOnInit(): void {}
 
   signUp() {
-    console.log(this.signUpForm.value);
+    //check if the form is valid
+    if (this.signUpForm.invalid) {
+      this.error = 'Error: Please fill in all the fields';
+      console.log(this.error);
+      return;
+    }
+
     this.api.signUp(this.signUpForm.value.username, this.signUpForm.value.password, this.signUpForm.value.gender, this.signUpForm.value.roomType).subscribe({
       next: () => {
         this.error = '';

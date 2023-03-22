@@ -10,12 +10,11 @@
       <h1>Softoom</h1>
     </header>
 
-    <p id="error-box"></p>
-
     <form class="signup-form col-6" (submit)="signUp()" [formGroup]="signUpForm">
       <div class="form-title">User Sign Up</div>
+      <p id="error-box">{{ error }}</p>
       <input
-        type="text"
+        type="email"
         name="username"
         class="form-element"
         formControlName="username"
@@ -37,12 +36,12 @@
       </select>
 
       <select id="room-type" class="form-element" formControlName="roomType">
-        <option value="option1">Study</option>
-        <option value="option2">Soft</option>
-        <option value="option3">Play</option>
+        <option value="study">Study</option>
+        <option value="soft">Soft</option>
+        <option value="play">Play</option>
       </select>
       <div>
-        <button id="signup" name="action" class="btn">Sign Up</button>
+        <button id="signup" type="submit" class="btn">Sign Up</button>
       </div>
     </form>
 
