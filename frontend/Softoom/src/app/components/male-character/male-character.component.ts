@@ -29,7 +29,7 @@ export class MaleCharacterComponent {
     renderer.setPixelRatio(window.devicePixelRatio * 2);
     document.body.appendChild(renderer.domElement);
 
-    //load the female role gltf model
+    //load the male role gltf model
 
     let model: THREE.Group;
 
@@ -39,7 +39,7 @@ export class MaleCharacterComponent {
       (gltf) => {
         model = gltf.scene;
         gltf.scene.scale.set(0.2, 0.2, 0.2);
-        gltf.scene.position.set(0, -2, 0);
+        gltf.scene.position.set(0, -1, 0);
         scene.add(gltf.scene);
       },
       undefined,
@@ -48,13 +48,29 @@ export class MaleCharacterComponent {
       }
     );
 
-    camera.position.z = 5;
+    //load room model
+    const room_loader = new GLTFLoader();
+    room_loader.load(
+      'assets/room-two/scene.gltf',
+      (room) => {
+        room.scene.scale.set(1.5, 1.5, 2.5);
+        room.scene.position.set(0, -1, 1);
+        scene.add(room.scene);
+      },
+      undefined,
+      (error) => {
+        console.error(error);
+      }
+    );
+
+    //camera look at the room model
+    camera.position.z = 1;
+    camera.position.y = 4;
+    camera.position.x = 7;
+    camera.lookAt(scene.position);
 
     function animate() {
       requestAnimationFrame(animate);
-
-      // Rotate the imported model
-      model.rotation.y += 0.01;
 
       renderer.render(scene, camera);
     }

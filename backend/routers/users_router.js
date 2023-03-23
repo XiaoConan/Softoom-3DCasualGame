@@ -20,7 +20,7 @@ usersRouter.post("/signup", async (req, res) => {
 });
 
 //user login
-usersRouter.post("/login", async (req, res) => {
+usersRouter.post("/signin", async (req, res) => {
   const user = await Users.findOne({
     where: {
       username: req.body.username,
@@ -32,5 +32,6 @@ usersRouter.post("/login", async (req, res) => {
   if (user.password !== req.body.password) {
     return res.status(401).json({ error: "Incorrect username or password." });
   }
+  console.log(user);
   return res.json(user);
 });
