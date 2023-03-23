@@ -29,7 +29,6 @@ export class SignUpPageComponent implements OnInit {
     //check if the form is valid
     if (this.signUpForm.invalid) {
       this.error = 'Error: Please fill in all the fields';
-      console.log(this.error);
       return;
     }
 
