@@ -12,7 +12,7 @@ export class MaleCharacterComponent {
 
   ngOnInit(): void {
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xCFB665);
+    scene.background = new THREE.Color(0xcfb665);
     const camera = new THREE.PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
@@ -78,7 +78,7 @@ export class MaleCharacterComponent {
         const raycaster = new THREE.Raycaster();
 
         // Set up the click event handler
-        window.addEventListener('click', function(event) {
+        window.addEventListener('click', function (event) {
           // Calculate the mouse position in normalized device coordinates
           const mouse = new THREE.Vector2();
           mouse.x = (event.clientX / window.innerWidth) * 2 - 1;

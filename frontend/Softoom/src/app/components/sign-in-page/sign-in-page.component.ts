@@ -9,11 +9,14 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./sign-in-page.component.scss', './sign-in-page-cols.scss'],
 })
 export class SignInPageComponent implements OnInit {
-
   signInForm: FormGroup;
   error: string = '';
 
-  constructor(private fb: FormBuilder, private api: ApiService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private api: ApiService,
+    private router: Router
+  ) {
     this.signInForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -30,19 +33,20 @@ export class SignInPageComponent implements OnInit {
       return;
     }
 
-    this.api.signIn(this.signInForm.value.username, this.signInForm.value.password).subscribe(
-      (user) => {
-        this.error = '';
-        if (user.gender === "female") {
-          this.router.navigate(['/room/female']);
+    this.api
+      .signIn(this.signInForm.value.username, this.signInForm.value.password)
+      .subscribe(
+        (user) => {
+          this.error = '';
+          if (user.gender === 'female') {
+            this.router.navigate(['/room/female']);
+          } else {
+            this.router.navigate(['/room/male']);
+          }
+        },
+        (error) => {
+          this.error = error.error.error;
         }
-        else {
-          this.router.navigate(['/room/male']);
-        }
-      },
-      (error) => {
-        this.error = error.error.error;
-      }
-    );
+      );
   }
 }

@@ -21,7 +21,7 @@ export class FemaleCharacterComponent {
     );
 
     // Add ambient light to the scene
-    const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.2); // color, intensity
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2); // color, intensity
     scene.add(ambientLight);
 
     const renderer = new THREE.WebGLRenderer();
@@ -78,7 +78,7 @@ export class FemaleCharacterComponent {
         const raycaster = new THREE.Raycaster();
 
         // Set up the click event handler
-        window.addEventListener('click', function(event) {
+        window.addEventListener('click', function (event) {
           // Calculate the mouse position in normalized device coordinates
           const mouse = new THREE.Vector2();
           mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
