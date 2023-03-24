@@ -1,0 +1,11 @@
+Model Information:
+* title:	Refrigerador
+* source:	https://sketchfab.com/3d-models/refrigerador-1b48a3d913474e6890b8b8163bb5407c
+* author:	rivego (https://sketchfab.com/rivego)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Refrigerador" (https://sketchfab.com/3d-models/refrigerador-1b48a3d913474e6890b8b8163bb5407c) by rivego (https://sketchfab.com/rivego) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
