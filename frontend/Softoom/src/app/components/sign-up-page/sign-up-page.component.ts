@@ -32,14 +32,19 @@ export class SignUpPageComponent implements OnInit {
       return;
     }
 
-    this.api.signUp(this.signUpForm.value.username, this.signUpForm.value.password, this.signUpForm.value.gender, this.signUpForm.value.roomType).subscribe({
-      next: () => {
+    this.api.signUp(this.signUpForm.value.username, this.signUpForm.value.password, this.signUpForm.value.gender, this.signUpForm.value.roomType).subscribe(
+      (user) => {
         this.error = '';
-        this.router.navigate(['/']);
+        if (user.gender === "female") {
+          this.router.navigate(['/room/female']);
+        }
+        else {
+          this.router.navigate(['/room/male']);
+        }
       },
-      error: (error) => {
-        this.error = error.error;
+      (error) => {
+        this.error = error.error.error;
       }
-    });
+    );
   }
 }

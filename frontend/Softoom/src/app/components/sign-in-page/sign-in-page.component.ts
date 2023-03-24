@@ -30,14 +30,19 @@ export class SignInPageComponent implements OnInit {
       return;
     }
 
-    this.api.signIn(this.signInForm.value.username, this.signInForm.value.password).subscribe({
-      next: () => {
+    this.api.signIn(this.signInForm.value.username, this.signInForm.value.password).subscribe(
+      (user) => {
         this.error = '';
-        this.router.navigate(['/room/male']);
+        if (user.gender === "female") {
+          this.router.navigate(['/room/female']);
+        }
+        else {
+          this.router.navigate(['/room/male']);
+        }
       },
-      error: (error) => {
-        this.error = error.error;
+      (error) => {
+        this.error = error.error.error;
       }
-    });
+    );
   }
 }
