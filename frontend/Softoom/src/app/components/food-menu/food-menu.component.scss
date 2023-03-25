@@ -1,0 +1,83 @@
+html {
+  overflow: -moz-scrollbars-vertical;
+}
+
+body {
+  background: #efe1ce;
+  font-family: "Comfortaa", cursive;
+  font-size: 14px;
+  color: #efe1ce;
+  text-align: center;
+  max-width: 100%;
+  margin: auto;
+  //center items in the body
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  background: #c1b3b6;
+  width: 100%;
+}
+
+footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.login-form {
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 5px #3c3d3f solid;
+  padding: 20px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form .form-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: -20px -10px 20px -10px;
+  padding: 10px 0px 10px 25px;
+  color: white;
+  background-color: #3c3d3f;
+  border-radius: 7px 7px 0px 0px;
+}
+
+.login-form .form-element {
+  margin-bottom: 10px;
+  font-size: 20px;
+  border-radius: 10px;
+  padding: 5px 10px 5px 10px;
+  border: 2px solid #3c3d3f;
+  background: white;
+}
+
+.btn {
+  border-radius: 10px;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+  font-size: 20px;
+  color: white;
+  background: #c1b3b6;
+  border: 2px solid white;
+  padding: 10px 20px 10px 20px;
+}
+
+.btn:hover {
+  background: #00b7ef;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+#error-box {
+  color: red;
+  align-self: left;
+  font-size: small;
+}

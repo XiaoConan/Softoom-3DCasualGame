@@ -5,6 +5,7 @@ import { SignUpPageComponent } from './components/sign-up-page/sign-up-page.comp
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { FemaleCharacterComponent } from './components/female-character/female-character.component';
 import { MaleCharacterComponent } from './components/male-character/male-character.component';
+import { FoodMenuComponent } from './components/food-menu/food-menu.component';
 
 const routes: Routes = [
   { path: 'sign-in', component: SignInPageComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'room/female', component: FemaleCharacterComponent },
   { path: 'room/male', component: MaleCharacterComponent },
+  { path: 'food', component: FoodMenuComponent },
 ];
 
 @NgModule({
