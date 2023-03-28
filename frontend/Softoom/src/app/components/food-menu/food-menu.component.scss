@@ -27,7 +27,7 @@ footer {
   text-align: center;
 }
 
-.login-form {
+.menu-form {
   margin-top: 10px;
   border-radius: 10px;
   border: 5px #3c3d3f solid;
@@ -36,7 +36,7 @@ footer {
   flex-direction: column;
 }
 
-.login-form .form-title {
+.menu-form .form-title {
   font-size: 20px;
   font-weight: bold;
   margin: -20px -10px 20px -10px;
@@ -46,13 +46,22 @@ footer {
   border-radius: 7px 7px 0px 0px;
 }
 
-.login-form .form-element {
-  margin-bottom: 10px;
+.menu-form .form-label
+{
   font-size: 20px;
-  border-radius: 10px;
-  padding: 5px 10px 5px 10px;
-  border: 2px solid #3c3d3f;
+  font-weight: bold;
+  margin: px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  color: #3c3d3f;
+  width: 100%;
+  border-bottom: 2px solid #3c3d3f;
+}
+
+.menu-form .form-element {
+  font-size: 20px;
+  border-bottom: 2px solid #3c3d3f;
   background: white;
+  width: 100%;
 }
 
 .btn {
