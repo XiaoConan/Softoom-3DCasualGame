@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { MatDialog } from '@angular/material/dialog';
+import { FoodMenuComponent } from '../food-menu/food-menu.component';
 
 @Component({
   selector: 'app-male-character',
@@ -8,7 +10,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
   styleUrls: ['./male-character.component.scss'],
 })
 export class MaleCharacterComponent {
-  constructor() {}
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {
     const scene = new THREE.Scene();
@@ -78,7 +80,7 @@ export class MaleCharacterComponent {
         const raycaster = new THREE.Raycaster();
 
         // Set up the click event handler
-        window.addEventListener('click', function (event) {
+        window.addEventListener('click', (event) => {
           // Calculate the mouse position in normalized device coordinates
           const mouse = new THREE.Vector2();
           mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -91,8 +93,8 @@ export class MaleCharacterComponent {
           const intersects = raycaster.intersectObject(freezer.scene);
 
           if (intersects.length > 0) {
-            // The user clicked on the model
-            console.log('Model clicked!');
+            // Open the dialog
+            this.openDialog();
           }
         });
       },
@@ -129,5 +131,11 @@ export class MaleCharacterComponent {
       renderer.render(scene, camera);
     }
     animate();
+  }
+
+  openDialog(): void {
+    this.dialog.open(FoodMenuComponent, {
+      data: {},
+    });
   }
 }

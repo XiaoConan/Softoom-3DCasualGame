@@ -3,32 +3,53 @@
   <div class="row form-label">
     <label class="col-4">Food Name</label>
     <label class="col-4">Price</label>
-    <label class="col-4">Quantity</label>
+    <label class="col-2">Quantity</label>
   </div>
   <div class="form-element row">
-    <p class="col-4">Food Name</p>
-    <p class="col-4">Price</p>
-    <p class="col-4">Quantity</p>
+    <p class="col-4">Baking Bread</p>
+    <p class="col-4">$3.99</p>
+    <button class="col-1 btn" (click)="increaseFoodOne()">+</button>
+    <p class="col-1">{{ foodOne }}</p>
+    <button class="col-1 btn" (click)="decreaseFoodOne()">-</button>
   </div>
   <div class="form-element row">
-    <p class="col-4">Food Name</p>
-    <p class="col-4">Price</p>
-    <p class="col-4">Quantity</p>
+    <p class="col-4">Grilled Sausage</p>
+    <p class="col-4">$3.99</p>
+    <button class="col-1 btn" (click)="increaseFoodTwo()">+</button>
+    <p class="col-1">{{ foodTwo }}</p>
+    <button class="col-1 btn" (click)="decreaseFoodTwo()">-</button>
   </div>
   <div class="form-element row">
-    <p class="col-4">Food Name</p>
-    <p class="col-4">Price</p>
-    <p class="col-4">Quantity</p>
+    <p class="col-4">Coke</p>
+    <p class="col-4">$1.99</p>
+    <button class="col-1 btn" (click)="increaseFoodThree()">+</button>
+    <p class="col-1">{{ foodThree }}</p>
+    <button class="col-1 btn" (click)="decreaseFoodThree()">-</button>
   </div>
   <div class="form-element row">
-    <p class="col-4">Food Name</p>
-    <p class="col-4">Price</p>
-    <p class="col-4">Quantity</p>
+    <p class="col-4">Pizza</p>
+    <p class="col-4">$7.99</p>
+    <button class="col-1 btn" (click)="increaseFoodFour()">+</button>
+    <p class="col-1">{{ foodFour }}</p>
+    <button class="col-1 btn" (click)="decreaseFoodFour()">-</button>
   </div>
   <div class="form-element row">
-    <p class="col-4">Food Name</p>
-    <p class="col-4">Price</p>
-    <p class="col-4">Quantity</p>
+    <p class="col-4">Hamburger</p>
+    <p class="col-4">$5.99</p>
+    <button class="col-1 btn" (click)="increaseFoodFive()">+</button>
+    <p class="col-1">{{ foodFive }}</p>
+    <button class="col-1 btn" (click)="decreaseFoodFive()">-</button>
+  </div>
+  <div class="form-element row">
+    <p class="col-8">Total</p>
+    <p class="col-4">${{ formattedTotalPrice }}</p>
+  </div>
+  <div class="form-element row">
+    <div class="col-2"></div>
+    <button class="col-3 submit-btn">Submit</button>
+    <div class="col-2"></div>
+    <button class="col-3 submit-btn">Reset</button>
+    <div class="col-2"></div>
   </div>
 </form>
 
