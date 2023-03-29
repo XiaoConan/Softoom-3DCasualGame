@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-food-menu',
@@ -14,9 +15,57 @@ export class FoodMenuComponent {
   totalPrice: number = 0;
   formattedTotalPrice: string = this.totalPrice.toFixed(2);
 
-  constructor() { }
+  paymentHandler: any = null;
+
+  constructor(private api: ApiService) {}
 
   ngOnInit(): void {
+    this.invokeStripe();
+  }
+
+  invokeStripe() {
+    if (!window.document.getElementById('stripe-script')) {
+      const script = window.document.createElement('script');
+      script.id = 'stripe-script';
+      script.type = 'text/javascript';
+      script.src = 'https://checkout.stripe.com/checkout.js';
+      script.onload = () => {
+        this.paymentHandler = (<any>window).StripeCheckout.configure({
+          key: 'pk_test_51Mr6f4GoTMrFoklNTppHZFZAVC5UqG6cNYWQ2E29RV7jFust3VL2j2oLgreaRp9gOvy8KlYnZXYGuL5U9Tzp62iJ00F1jDDt8M',
+          locale: 'auto',
+          token: function (stripeToken: any) {
+            console.log(stripeToken);
+          },
+        });
+      };
+
+      window.document.body.appendChild(script);
+    }
+  }
+
+  //checkout
+  makePayment() {
+    const paymentHandler = (<any>window).StripeCheckout.configure({
+      key: 'pk_test_51Mr6f4GoTMrFoklNTppHZFZAVC5UqG6cNYWQ2E29RV7jFust3VL2j2oLgreaRp9gOvy8KlYnZXYGuL5U9Tzp62iJ00F1jDDt8M',
+      locale: 'auto',
+      token: function (stripeToken: any) {
+        console.log(stripeToken);
+
+        //send the token to the backend
+        this.api
+          .makePayment(stripeToken)
+          .subscribe((response: any) => {
+            console.log(response);
+          }
+        );
+      }
+    });
+
+    paymentHandler.open({
+      name: 'Softoom',
+      description: 'Food Order',
+      amount: this.totalPrice * 100,
+    });
   }
 
   //increase food quantity
@@ -101,5 +150,4 @@ export class FoodMenuComponent {
     this.foodFive = 0;
     this.getTotalPrice();
   }
-
 }
