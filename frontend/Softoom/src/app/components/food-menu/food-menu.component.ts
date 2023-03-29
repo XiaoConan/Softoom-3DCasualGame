@@ -92,4 +92,14 @@ export class FoodMenuComponent {
     this.formattedTotalPrice = this.totalPrice.toFixed(2);
   }
 
+  //reset food quantity
+  reset() {
+    this.foodOne = 0;
+    this.foodTwo = 0;
+    this.foodThree = 0;
+    this.foodFour = 0;
+    this.foodFive = 0;
+    this.getTotalPrice();
+  }
+
 }

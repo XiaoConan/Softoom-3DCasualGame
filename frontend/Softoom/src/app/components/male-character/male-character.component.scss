@@ -1,0 +1,28 @@
+.dialog {
+  position: fixed;
+  //set the size of the dialog
+  width: 100%;
+  left: 25%;
+}
+
+.btn {
+  position: fixed;
+  left: 70%;
+  border-radius: 10px;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+  font-size: 7px;
+  font-weight: bold;
+  height: 20px;
+  width: 20px;
+  color: white;
+  background: #c1b3b6;
+  border: 2px solid white;
+  margin-top: 2px;
+}
+
+.btn:hover {
+  background: #00b7ef;
+  color: #ffffff;
+  cursor: pointer;
+}
