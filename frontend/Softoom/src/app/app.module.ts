@@ -8,6 +8,10 @@ import { FemaleCharacterComponent } from './components/female-character/female-c
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { SignInPageComponent } from './components/sign-in-page/sign-in-page.component';
 import { SignUpPageComponent } from './components/sign-up-page/sign-up-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FoodMenuComponent } from './components/food-menu/food-menu.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -17,8 +21,16 @@ import { SignUpPageComponent } from './components/sign-up-page/sign-up-page.comp
     HomePageComponent,
     SignInPageComponent,
     SignUpPageComponent,
+    FoodMenuComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    MatDialogModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
