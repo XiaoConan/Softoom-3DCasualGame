@@ -8,6 +8,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
   styleUrls: ['./female-character.component.scss'],
 })
 export class FemaleCharacterComponent {
+  visible: boolean = false;
+
   constructor() {}
 
   ngOnInit(): void {
@@ -73,28 +75,6 @@ export class FemaleCharacterComponent {
         freezer.scene.position.set(3, -0.5, 4.5);
 
         scene.add(freezer.scene);
-
-        // Create a Raycaster object
-        const raycaster = new THREE.Raycaster();
-
-        // Set up the click event handler
-        window.addEventListener('click', function (event) {
-          // Calculate the mouse position in normalized device coordinates
-          const mouse = new THREE.Vector2();
-          mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-          mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-          // Set the raycaster position based on the mouse position
-          raycaster.setFromCamera(mouse, camera);
-
-          // Check if the ray intersects with the model
-          const intersects = raycaster.intersectObject(freezer.scene);
-
-          if (intersects.length > 0) {
-            // The user clicked on the model
-            console.log('Model clicked!');
-          }
-        });
       },
       undefined,
       (error) => {
@@ -110,6 +90,27 @@ export class FemaleCharacterComponent {
         food.scene.scale.set(1, 1, 1);
         food.scene.position.set(-2, -1, 8.5);
         scene.add(food.scene);
+
+        // Create a Raycaster object
+        const raycaster = new THREE.Raycaster();
+
+        // Set up the click event handler
+        window.addEventListener('click', (event) => {
+          // Calculate the mouse position in normalized device coordinates
+          const mouse = new THREE.Vector2();
+          mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+          mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+          // Set the raycaster position based on the mouse position
+          raycaster.setFromCamera(mouse, camera);
+
+          // Check if the ray intersects with the model
+          const intersects = raycaster.intersectObject(food.scene);
+
+          if (intersects.length > 0) {
+            this.visible = true;
+          }
+        });
       },
       undefined,
       (error) => {
@@ -129,5 +130,9 @@ export class FemaleCharacterComponent {
       renderer.render(scene, camera);
     }
     animate();
+  }
+
+  closeFoodMenu() {
+    this.visible = false;
   }
 }

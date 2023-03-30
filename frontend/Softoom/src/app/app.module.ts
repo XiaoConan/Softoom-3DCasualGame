@@ -10,6 +10,8 @@ import { SignInPageComponent } from './components/sign-in-page/sign-in-page.comp
 import { SignUpPageComponent } from './components/sign-up-page/sign-up-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FoodMenuComponent } from './components/food-menu/food-menu.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
     HomePageComponent,
     SignInPageComponent,
     SignUpPageComponent,
+    FoodMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +29,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -11,8 +11,8 @@ export const Food = sequelize.define("food", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  hungerValue: {
-    type: DataTypes.INTEGER,
+  email: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
 });
