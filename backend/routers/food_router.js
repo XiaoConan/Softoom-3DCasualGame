@@ -1,7 +1,9 @@
 import { Router } from "express";
 import { Stripe } from "stripe";
 
-const stripe = new Stripe('sk_test_51Mr6f4GoTMrFoklNklJ4mEmG2mtYbtNEuJAxm7zAw2KF1yeW0mTGfz8DOmsbqQ7fJmr0vobdb2GEMS0ldz5RSNs500xFehDdUB'); 
+const stripe = new Stripe(
+  "sk_test_51Mr6f4GoTMrFoklNklJ4mEmG2mtYbtNEuJAxm7zAw2KF1yeW0mTGfz8DOmsbqQ7fJmr0vobdb2GEMS0ldz5RSNs500xFehDdUB"
+);
 
 export const foodRouter = Router();
 
@@ -10,10 +12,10 @@ foodRouter.post("/order", async (req, res) => {
   try {
     const token = req.body.token;
     const amount = req.body.amount;
-    
+
     const customer = await stripe.customers.create({
       email: token.email,
-      source: token.id
+      source: token.id,
     });
 
     const charge = await stripe.charges.create({
@@ -25,13 +27,12 @@ foodRouter.post("/order", async (req, res) => {
 
     console.log(charge);
     res.json({
-      data: "success"
+      data: "Payment Successful!",
     });
   } catch (error) {
     console.log(error);
     res.json({
-      data: "failure",
+      error: "Payment Failed!",
     });
   }
 });
-

@@ -10,7 +10,6 @@ import { FoodMenuComponent } from '../food-menu/food-menu.component';
   styleUrls: ['./male-character.component.scss'],
 })
 export class MaleCharacterComponent {
-
   visible: boolean = false;
 
   constructor(private dialog: MatDialog) {}

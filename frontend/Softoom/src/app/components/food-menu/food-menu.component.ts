@@ -67,10 +67,22 @@ export class FoodMenuComponent {
     const paymentStripe = (token: any) => {
       this.api.makePayment(this.totalPrice, token).subscribe(
         (data) => {
-          console.log(data);
+          const status = document.getElementById('status');
+          status!.innerHTML = data.data;
+          status!.classList.add('fade-out');
+          setTimeout(() => {
+            status!.innerHTML = '';
+            status!.classList.remove('fade-out');
+          }, 5000);
         },
         (error) => {
-          console.log(error);
+          const status = document.getElementById('status');
+          status!.innerHTML = error.error;
+          status!.classList.add('fade-out');
+          setTimeout(() => {
+            status!.innerHTML = '';
+            status!.classList.remove('fade-out');
+          }, 5000);
         }
       );
     };

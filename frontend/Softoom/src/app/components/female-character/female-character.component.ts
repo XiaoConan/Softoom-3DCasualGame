@@ -8,7 +8,6 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
   styleUrls: ['./female-character.component.scss'],
 })
 export class FemaleCharacterComponent {
-
   visible: boolean = false;
 
   constructor() {}

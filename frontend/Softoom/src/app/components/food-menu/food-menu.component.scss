@@ -18,8 +18,7 @@
   border-radius: 7px 7px 0px 0px;
 }
 
-.menu-form .form-label
-{
+.menu-form .form-label {
   font-size: 10px;
   font-weight: bold;
   padding: 5px 0px 5px 0px;
@@ -75,8 +74,29 @@
   visibility: hidden;
 }
 
-#error-box {
-  color: red;
-  align-self: left;
-  font-size: small;
+#status {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #80ff27;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+/* Define the keyframes for the animation */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Apply the animation to the element */
+.fade-out {
+  animation-name: fadeOut;
+  animation-duration: 5s; /* Change this to adjust the duration */
+  animation-fill-mode: forwards; /* Keep the final state of the animation */
 }
