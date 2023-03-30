@@ -41,6 +41,7 @@ export class FemaleCharacterComponent {
       'assets/female-role/scene.gltf',
       (gltf) => {
         model = gltf.scene;
+
         gltf.scene.scale.set(0.2, 0.2, 0.2);
         gltf.scene.position.set(0, -1, 0);
         scene.add(gltf.scene);
@@ -124,9 +125,30 @@ export class FemaleCharacterComponent {
     camera.position.x = 7;
     camera.lookAt(scene.position);
 
+    //player model movement
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'w') {
+        model.position.x -= 0.1;
+        //let the model face to the direction of movement
+        model.rotation.y = (3 * Math.PI) / 2;
+      }
+      if (event.key === 's') {
+        model.position.x += 0.1;
+        model.rotation.y = Math.PI / 2;
+      }
+      if (event.key === 'a') {
+        model.position.z += 0.1;
+        model.rotation.y = 0;
+      }
+      if (event.key === 'd') {
+        model.position.z -= 0.1;
+        model.rotation.y = Math.PI;
+      }
+    });
+
+
     function animate() {
       requestAnimationFrame(animate);
-
       renderer.render(scene, camera);
     }
     animate();
