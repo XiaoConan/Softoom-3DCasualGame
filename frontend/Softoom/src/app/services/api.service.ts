@@ -35,9 +35,10 @@ export class ApiService {
   }
 
   //make payment
-  makePayment(stripeToken: any): Observable<any> {
-    return this.http.post(`${this.endpoint}/food/order`, {
-      token: stripeToken,
+  makePayment(amount: number, token: any): Observable<any> {
+    return this.http.post<any>(`${this.endpoint}/food/order`, {
+      amount,
+      token,
     });
   }
 }

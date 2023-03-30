@@ -51,19 +51,33 @@ export class FoodMenuComponent {
       token: function (stripeToken: any) {
         console.log(stripeToken);
 
-        //send the token to the backend
-        this.api
-          .makePayment(stripeToken)
-          .subscribe((response: any) => {
-            console.log(response);
-          }
-        );
-      }
+        // //send the array of all food quantities to the backend
+        // let foodQuantities = [
+        //   this.foodOne,
+        //   this.foodTwo,
+        //   this.foodThree,
+        //   this.foodFour,
+        //   this.foodFive,
+        // ];
+
+        paymentStripe(stripeToken);
+      },
     });
+
+    const paymentStripe = (token: any) => {
+      this.api.makePayment(this.totalPrice, token).subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    };
 
     paymentHandler.open({
       name: 'Softoom',
-      description: 'Food Order',
+      description: 'Softoom Food Order',
       amount: this.totalPrice * 100,
     });
   }

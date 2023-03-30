@@ -7,16 +7,31 @@ export const foodRouter = Router();
 
 //food order
 foodRouter.post("/order", async (req, res) => {
-//   const order = Food.build({
-//     username: req.body.username,
-//     food: req.body.food,
-//     quantity: req.body.quantity,
-//     price: req.body.price,
-//   });
-//   try {
-//     await order.save();
-//   } catch (error) {
-//     return res.status(422).json({ error: "Order creation failed." });
-//   }
-  return res.json({ message: "Order created successfully." });
+  try {
+    const token = req.body.token;
+    const amount = req.body.amount;
+    
+    const customer = await stripe.customers.create({
+      email: token.email,
+      source: token.id
+    });
+
+    const charge = await stripe.charges.create({
+      amount: amount * 100,
+      description: "Softoom Food Order",
+      currency: "CAD",
+      customer: customer.id,
+    });
+
+    console.log(charge);
+    res.json({
+      data: "success"
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      data: "failure",
+    });
+  }
 });
+
