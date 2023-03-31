@@ -47,4 +47,4 @@ the feeling of living with best friends in a cozy and comfortable room.<br/>
   
 ### video link
 
-https://www.youtube.com/watch?v=RDJMhaDrBFE
+https://youtu.be/RDJMhaDrBFE
