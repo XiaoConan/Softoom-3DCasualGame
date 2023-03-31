@@ -6,7 +6,6 @@ by team EmptyStackDevelopers
 
 ### Team members with student numbers
 
-Zexi Zhang, 1005701064<br/>
 Miao Han, 1007423566
 
 ### Description of the web application
@@ -45,3 +44,7 @@ the feeling of living with best friends in a cozy and comfortable room.<br/>
 - For beta version, we are going to deploy the player movement, food order/payment and fridge storage features.<br/>
 - For final version, we are going to deploy the interaction between differen users, including visiting other's room, stealing food<br.>
   and audio interaction functionality. <br/>
+  
+### video link
+
+https://www.youtube.com/watch?v=RDJMhaDrBFE
