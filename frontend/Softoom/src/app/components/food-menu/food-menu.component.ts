@@ -51,21 +51,15 @@ export class FoodMenuComponent {
       token: function (stripeToken: any) {
         console.log(stripeToken);
 
-        // //send the array of all food quantities to the backend
-        // let foodQuantities = [
-        //   this.foodOne,
-        //   this.foodTwo,
-        //   this.foodThree,
-        //   this.foodFour,
-        //   this.foodFive,
-        // ];
-
         paymentStripe(stripeToken);
       },
     });
 
     const paymentStripe = (token: any) => {
-      this.api.makePayment(this.totalPrice, token).subscribe(
+      //send the array of all food quantities to the backend
+      let foodQuantities: number[] = [this.foodOne, this.foodTwo, this.foodThree, this.foodFour, this.foodFive];
+
+      this.api.makePayment(foodQuantities, this.totalPrice, token).subscribe(
         (data) => {
           const status = document.getElementById('status');
           status!.innerHTML = data.data;

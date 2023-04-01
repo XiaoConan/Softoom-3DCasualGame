@@ -57,9 +57,11 @@ export class FemaleCharacterComponent {
     room_loader.load(
       'assets/room-one/scene.gltf',
       (room) => {
+
         room.scene.scale.set(0.025, 0.025, 0.025);
         room.scene.position.set(0, -1, 1);
         scene.add(room.scene);
+
       },
       undefined,
       (error) => {
@@ -127,7 +129,7 @@ export class FemaleCharacterComponent {
 
     //player model movement
     window.addEventListener('keydown', (event) => {
-      if (event.key === 'w') {
+      if (event.key === 'w' ) {
         model.position.x -= 0.1;
         //let the model face to the direction of movement
         model.rotation.y = (3 * Math.PI) / 2;

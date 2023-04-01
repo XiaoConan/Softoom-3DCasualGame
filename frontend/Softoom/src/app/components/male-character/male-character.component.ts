@@ -10,6 +10,7 @@ import { FoodMenuComponent } from '../food-menu/food-menu.component';
   styleUrls: ['./male-character.component.scss'],
 })
 export class MaleCharacterComponent {
+  fridge_visible: boolean = false;
   visible: boolean = false;
 
   constructor(private dialog: MatDialog) {}
@@ -77,6 +78,27 @@ export class MaleCharacterComponent {
         freezer.scene.rotation.y = -1.5;
 
         scene.add(freezer.scene);
+
+        // Create a Raycaster object
+        const raycaster2 = new THREE.Raycaster();
+
+        // Set up the click event handler
+        window.addEventListener('click', (event) => {
+          // Calculate the mouse position in normalized device coordinates
+          const mouse = new THREE.Vector2();
+          mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+          mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+          // Set the raycaster position based on the mouse position
+          raycaster2.setFromCamera(mouse, camera);
+
+          // Check if the ray intersects with the model
+          const intersects = raycaster2.intersectObject(freezer.scene);
+
+          if (intersects.length > 0) {
+            this.fridge_visible = true;
+          }
+        });
       },
       undefined,
       (error) => {
@@ -157,5 +179,8 @@ export class MaleCharacterComponent {
 
   closeFoodMenu() {
     this.visible = false;
+  }
+  closeFridge() {
+    this.fridge_visible = false;
   }
 }

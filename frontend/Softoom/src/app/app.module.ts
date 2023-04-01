@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FoodMenuComponent } from './components/food-menu/food-menu.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { StorageComponent } from './components/storage/storage.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     SignInPageComponent,
     SignUpPageComponent,
     FoodMenuComponent,
+    StorageComponent,
   ],
   imports: [
     BrowserModule,

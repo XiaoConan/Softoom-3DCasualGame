@@ -2,3 +2,7 @@
   <app-food-menu class="cols-6 dialog"></app-food-menu>
   <button class="btn dialog" (click)="closeFoodMenu()">X</button>
 </ng-container>
+<ng-container *ngIf="fridge_visible">
+  <app-storage class="cols-6 dialog"></app-storage>
+  <button class="btn dialog" (click)="closeFridge()">X</button>
+</ng-container>

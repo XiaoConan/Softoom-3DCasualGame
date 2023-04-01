@@ -35,8 +35,9 @@ export class ApiService {
   }
 
   //make payment
-  makePayment(amount: number, token: any): Observable<any> {
+  makePayment(foodQuantities: number[], amount: number, token: any): Observable<any> {
     return this.http.post<any>(`${this.endpoint}/food/order`, {
+      foodQuantities,
       amount,
       token,
     });
