@@ -56,9 +56,6 @@ export class FoodMenuComponent {
     });
 
     const paymentStripe = (token: any) => {
-      //send the array of all food quantities to the backend
-      let foodQuantities: number[] = [this.foodOne, this.foodTwo, this.foodThree, this.foodFour, this.foodFive];
-
       this.api.makePayment(this.totalPrice, token).subscribe(
         (data) => {
           const status = document.getElementById('status');
@@ -70,15 +67,67 @@ export class FoodMenuComponent {
           }, 5000);
 
           //store the food in the database
-          this.api.storeFood(foodQuantities, token.email).subscribe(
-            (data) => {
-              console.log(data);
-            },
-            (error) => {
-              console.log(error);
+          if (this.foodOne > 0) {
+            for (let i = 0; i < this.foodOne; i++) {
+              this.api.storeFood("Baking Bread", 3, token.email).subscribe(
+                (data) => {
+                  console.log(data);
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
             }
-          );
-
+          }
+          if (this.foodTwo > 0) {
+            for (let i = 0; i < this.foodTwo; i++) {
+              this.api.storeFood("Grilled Sausage", 3, token.email).subscribe(
+                (data) => {
+                  console.log(data);
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+            }
+          }
+          if (this.foodThree > 0) {
+            for (let i = 0; i < this.foodThree; i++) {
+              this.api.storeFood("Coke", 1, token.email).subscribe(
+                (data) => {
+                  console.log(data);
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+            }
+          }
+          if (this.foodFour > 0) {
+            for (let i = 0; i < this.foodFour; i++) {
+              this.api.storeFood("Pizza", 7, token.email).subscribe(
+                (data) => {
+                  console.log(data);
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+            }
+          }
+          if (this.foodFive > 0) {
+            for (let i = 0; i < this.foodFive; i++) {
+              this.api.storeFood("Hamburger", 5, token.email).subscribe(
+                (data) => {
+                  console.log(data);
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+            }
+          }
+          this.reset();
         },
         (error) => {
           const status = document.getElementById('status');
@@ -164,11 +213,11 @@ export class FoodMenuComponent {
   //get total price
   getTotalPrice() {
     this.totalPrice =
-      this.foodOne * 3.99 +
-      this.foodTwo * 3.99 +
-      this.foodThree * 1.99 +
-      this.foodFour * 7.99 +
-      this.foodFive * 5.99;
+      this.foodOne * 3 +
+      this.foodTwo * 3 +
+      this.foodThree * 1 +
+      this.foodFour * 7 +
+      this.foodFive * 5;
     this.formattedTotalPrice = this.totalPrice.toFixed(2);
   }
 

@@ -2,42 +2,37 @@
   <div class="form-title">Freezer Storage</div>
   <div class="row form-label">
     <label class="col-4">Food Name</label>
-    <label class="col-2">Price</label>
-    <label class="col-2">Puchaser</label>
+    <label class="col-3">Quantity</label>
+    <label class="col-3">Hunger Value</label>
   </div>
   <div class="form-element row">
     <p class="col-4">Baking Bread</p>
-    <p class="col-2">$3.99</p>
-    <p class="col-2">Jerry</p>
-    <button class="col-2 btn">Steal</button>
-    <button class="col-2 btn">Eat</button>
+    <p class="col-3">{{ foodOne }}</p>
+    <p class="col-3">3</p>
+    <button class="col-2 btn" (click)="eatFoodOne()">Eat</button>
   </div>
   <div class="form-element row">
     <p class="col-4">Grilled Sausage</p>
-    <p class="col-2">$3.99</p>
-    <p class="col-2">John</p>
-    <button class="col-2 btn">Steal</button>
-    <button class="col-2 btn">Eat</button>
+    <p class="col-3">{{ foodTwo }}</p>
+    <p class="col-3">3</p>
+    <button class="col-2 btn" (click)="eatFoodTwo()">Eat</button>
   </div>
   <div class="form-element row">
     <p class="col-4">Coke</p>
-    <p class="col-2">$1.99</p>
-    <p class="col-2">Amy</p>
-    <button class="col-2 btn">Steal</button>
-    <button class="col-2 btn">Eat</button>
+    <p class="col-3">{{ foodThree }}</p>
+    <p class="col-3">3</p>
+    <button class="col-2 btn" (click)="eatFoodThree()">Eat</button>
   </div>
   <div class="form-element row">
     <p class="col-4">Pizza</p>
-    <p class="col-2">$7.99</p>
-    <p class="col-2">Jerry</p>
-    <button class="col-2 btn">Steal</button>
-    <button class="col-2 btn">Eat</button>
+    <p class="col-3">{{ foodFour }}</p>
+    <p class="col-3">3</p>
+    <button class="col-2 btn" (click)="eatFoodFour()">Eat</button>
   </div>
   <div class="form-element row">
     <p class="col-4">Hamburger</p>
-    <p class="col-2">$5.99</p>
-    <p class="col-2">Jerry</p>
-    <button class="col-2 btn">Steal</button>
-    <button class="col-2 btn">Eat</button>
+    <p class="col-3">{{ foodFive }}</p>
+    <p class="col-3">3</p>
+    <button class="col-2 btn" (click)="eatFoodFive()">Eat</button>
   </div>
 </form>

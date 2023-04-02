@@ -43,10 +43,21 @@ export class ApiService {
   }
 
   //store food
-  storeFood(foodQuantities: number[], email: String): Observable<any> {
+  storeFood(foodName: String, price: number, email: String): Observable<any> {
     return this.http.post(`${this.endpoint}/food/storage`, {
-      foodQuantities,
+      foodName,
+      price,
       email,
     });
+  }
+
+  //get all food in the user's fridge
+  getFood(email: String): Observable<any> {
+    return this.http.get(`${this.endpoint}/food/fridge/${email}`);
+  }
+
+  //delete food from fridge
+  deleteFood(foodName: String, email: String): Observable<any> {
+    return this.http.delete(`${this.endpoint}/food/fridge/${foodName}/${email}`);
   }
 }

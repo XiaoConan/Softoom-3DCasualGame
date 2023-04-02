@@ -12,8 +12,13 @@ import { FoodMenuComponent } from '../food-menu/food-menu.component';
 export class MaleCharacterComponent {
   fridge_visible: boolean = false;
   visible: boolean = false;
+  hungerValue: number = 100;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog) {
+    setInterval(() => {
+      this.hungerValue -= 1;
+    }, 10000);
+  }
 
   ngOnInit(): void {
     const scene = new THREE.Scene();
@@ -33,6 +38,26 @@ export class MaleCharacterComponent {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio * 2);
     document.body.appendChild(renderer.domElement);
+
+    //load the small model on top of hunger bar
+    let hunger_model: THREE.Group;
+    const hunger_loader = new GLTFLoader();
+    hunger_loader.load(
+      'assets/male-role/scene.gltf',
+      (role) => {
+        hunger_model = role.scene;
+        hunger_model.scale.set(0.05, 0.05, 0.05);
+        //set on the top left of the screen
+        hunger_model.position.set(-3, 4, 10.8);
+        scene.add(hunger_model);
+      },
+      undefined,
+      (error) => {
+        console.error(error);
+      }
+    );
+
+
 
     //load the male role gltf model
 
@@ -171,6 +196,8 @@ export class MaleCharacterComponent {
 
     function animate() {
       requestAnimationFrame(animate);
+      //rotated the hunger model
+      hunger_model.rotation.y += 0.01;
 
       renderer.render(scene, camera);
     }

@@ -7,8 +7,99 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./storage.component.scss', './storage-cols.scss'],
 })
 export class StorageComponent {
+
+  foodOne: number = 0;
+  foodTwo: number = 0;
+  foodThree: number = 0;
+  foodFour: number = 0;
+  foodFive: number = 0;
+
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
+    const fridge = document.querySelector('.form-food-section');
+    //clear the fridge
+    this.api.getFood("jerry@gmail.com").subscribe(
+      (data) => {
+        console.log(data);
+        this.foodOne = data.foodOne;
+        this.foodTwo = data.foodTwo;
+        this.foodThree = data.foodThree;
+        this.foodFour = data.foodFour;
+        this.foodFive = data.foodFive;
+      }
+    );
   }
+
+  //eat the food
+  eatFoodOne() {
+    if (this.foodOne > 0) {
+      this.foodOne--;
+      this.api.deleteFood("Baking Bread", "jerry@gmail.com").subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  eatFoodTwo() {
+    if (this.foodTwo > 0) {
+      this.foodTwo--;
+      this.api.deleteFood("Grilled Sausage", "jerry@gmail.com").subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  eatFoodThree() {
+    if (this.foodThree > 0) {
+      this.foodThree--;
+      this.api.deleteFood("Coke", "jerry@gmail.com").subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  eatFoodFour() {
+    if (this.foodFour > 0) {
+      this.foodFour--;
+      this.api.deleteFood("Pizza", "jerry@gmail.com").subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  eatFoodFive() {
+    if (this.foodFive > 0) {
+      this.foodFive--;
+      this.api.deleteFood("Hamburger", "jerry@gmail.com").subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
 }

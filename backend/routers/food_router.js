@@ -42,8 +42,8 @@ foodRouter.post("/order", async (req, res) => {
 //food storage
 foodRouter.post("/storage", async (req, res) => {
   const food = Food.build({
-    foodName: "Baking Bread",
-    price: 4,
+    foodName: req.body.foodName,
+    price: req.body.price,
     email: req.body.email,
     userId: 12,
   });
@@ -56,3 +56,60 @@ foodRouter.post("/storage", async (req, res) => {
   return res.json({ message: "Food created successfully." });
   
 });
+
+//get all food in the user's fridge
+foodRouter.get("/fridge/:email", async (req, res) => {
+  const foodOne = await Food.count({
+    where: {
+      email: req.params.email,
+      foodName: "Baking Bread",
+    },
+  });
+  const foodTwo = await Food.count({
+    where: {
+      email: req.params.email,
+      foodName: "Grilled Sausage",
+    },
+  });
+  const foodThree = await Food.count({
+    where: {
+      email: req.params.email,
+      foodName: "Coke",
+    },
+  });
+  const foodFour = await Food.count({
+    where: {
+      email: req.params.email,
+      foodName: "Pizza",
+    },
+  });
+  const foodFive = await Food.count({
+    where: {
+      email: req.params.email,
+      foodName: "Hamberger",
+    },
+  });
+
+  return res.json({foodOne, foodTwo, foodThree, foodFour, foodFive});
+});
+
+//delete food from the user's fridge
+foodRouter.delete("/fridge/:foodName/:email", async (req, res) => {
+  const food = await Food.findOne({
+    where: {
+      email: req.params.email,
+      foodName: req.params.foodName,
+    },
+  });
+  if (!food) {
+    return res.status(404).json({ error: "No food of this type." });
+  }
+  try {
+    await food.destroy();
+    return res.json({ message: "Food deleted successfully." });
+  } catch (error) {
+    console.log(error);
+    return res.status(422).json({ error: "Food deletion failed." });
+  }
+});
+
