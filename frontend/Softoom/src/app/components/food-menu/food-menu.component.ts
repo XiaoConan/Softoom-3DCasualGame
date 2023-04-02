@@ -59,7 +59,7 @@ export class FoodMenuComponent {
       //send the array of all food quantities to the backend
       let foodQuantities: number[] = [this.foodOne, this.foodTwo, this.foodThree, this.foodFour, this.foodFive];
 
-      this.api.makePayment(foodQuantities, this.totalPrice, token).subscribe(
+      this.api.makePayment(this.totalPrice, token).subscribe(
         (data) => {
           const status = document.getElementById('status');
           status!.innerHTML = data.data;
@@ -68,6 +68,17 @@ export class FoodMenuComponent {
             status!.innerHTML = '';
             status!.classList.remove('fade-out');
           }, 5000);
+
+          //store the food in the database
+          this.api.storeFood(foodQuantities, token.email).subscribe(
+            (data) => {
+              console.log(data);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+
         },
         (error) => {
           const status = document.getElementById('status');
