@@ -60,4 +60,14 @@ export class ApiService {
   deleteFood(foodName: String, email: String): Observable<any> {
     return this.http.delete(`${this.endpoint}/food/fridge/${foodName}/${email}`);
   }
+
+  //get user info from email
+  getUser(email: String): Observable<any> {
+    return this.http.get(`${this.endpoint}/users/find/${email}`);
+  }
+
+  //update user info
+  updateHungryValue(email: String, hungerValue: number): Observable<any> {
+    return this.http.patch(`${this.endpoint}/users/update/${email}/${hungerValue}`, {});
+  }
 }

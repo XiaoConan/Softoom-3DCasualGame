@@ -45,7 +45,7 @@ foodRouter.post("/storage", async (req, res) => {
     foodName: req.body.foodName,
     price: req.body.price,
     email: req.body.email,
-    userId: 12,
+    userId: 17,
   });
   try {
     await food.save();
@@ -106,6 +106,37 @@ foodRouter.delete("/fridge/:foodName/:email", async (req, res) => {
   }
   try {
     await food.destroy();
+    const user = await Users.findOne({
+      where: {
+        email: req.params.email,
+      },
+    });
+    if (req.params.foodName === "Baking Bread" || req.params.foodName === "Grilled Sausage") {
+      if (user.hungerValue + 30 >= 100) {
+        user.hungerValue = 100;
+      } else {
+        user.hungerValue += 30;
+      }
+    } else if (req.params.foodName === "Coke") {
+      if (user.hungerValue + 10 >= 100) {
+        user.hungerValue = 100;
+      } else {
+        user.hungerValue += 10;
+      }
+    } else if (req.params.foodName === "Pizza") {
+      if (user.hungerValue + 70 >= 100) {
+        user.hungerValue = 100;
+      } else {
+        user.hungerValue += 70;
+      }
+    } else if (req.params.foodName === "Hamberger") {
+      if (user.hungerValue + 50 >= 100) {
+        user.hungerValue = 100;
+      } else {
+        user.hungerValue += 50;
+      }
+    }
+    await user.save();
     return res.json({ message: "Food deleted successfully." });
   } catch (error) {
     console.log(error);

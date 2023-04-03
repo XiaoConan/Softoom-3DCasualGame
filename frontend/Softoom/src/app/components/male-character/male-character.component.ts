@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { MatDialog } from '@angular/material/dialog';
-import { FoodMenuComponent } from '../food-menu/food-menu.component';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-male-character',
@@ -12,9 +11,13 @@ import { FoodMenuComponent } from '../food-menu/food-menu.component';
 export class MaleCharacterComponent {
   fridge_visible: boolean = false;
   visible: boolean = false;
-  hungerValue: number = 100;
+  hungerValue: number = 0;
 
-  constructor(private dialog: MatDialog) {
+  constructor(private api: ApiService) {
+    this.api.getUser("jerry@gmail.com").subscribe((user) => {
+      this.hungerValue = user.hungerValue;
+    });
+
     setInterval(() => {
       this.hungerValue -= 1;
     }, 10000);
@@ -122,6 +125,9 @@ export class MaleCharacterComponent {
 
           if (intersects.length > 0) {
             this.fridge_visible = true;
+            this.api.updateHungryValue("jerry@gmail,com", this.hungerValue);
+
+
           }
         });
       },
@@ -197,7 +203,9 @@ export class MaleCharacterComponent {
     function animate() {
       requestAnimationFrame(animate);
       //rotated the hunger model
-      hunger_model.rotation.y += 0.01;
+      if (hunger_model) {
+        hunger_model.rotation.y += 0.01;
+      }
 
       renderer.render(scene, camera);
     }
@@ -209,5 +217,8 @@ export class MaleCharacterComponent {
   }
   closeFridge() {
     this.fridge_visible = false;
+    this.api.getUser("jerry@gmail.com").subscribe((user) => {
+      this.hungerValue = user.hungerValue;
+    });
   }
 }

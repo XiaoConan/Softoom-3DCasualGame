@@ -19,4 +19,9 @@ export const Users = sequelize.define("users", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  //integer btween 0 and 100
+  hungerValue: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
 });
