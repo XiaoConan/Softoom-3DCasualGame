@@ -127,7 +127,6 @@ export class MaleCharacterComponent {
             this.fridge_visible = true;
             this.api.updateHungryValue("jerry@gmail,com", this.hungerValue);
 
-
           }
         });
       },

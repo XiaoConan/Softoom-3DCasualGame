@@ -17,7 +17,6 @@ export class StorageComponent {
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
-    const fridge = document.querySelector('.form-food-section');
     //clear the fridge
     this.api.getFood("jerry@gmail.com").subscribe(
       (data) => {
