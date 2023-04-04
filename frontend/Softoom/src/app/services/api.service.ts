@@ -62,12 +62,21 @@ export class ApiService {
   }
 
   //get user info from email
-  getUser(email: String): Observable<any> {
-    return this.http.get(`${this.endpoint}/users/find/${email}`);
+  getUser(): Observable<any> {
+    return this.http.get(`${this.endpoint}/users/me`, {
+      withCredentials: true,
+    });
   }
 
   //update user info
   updateHungryValue(email: String, hungerValue: number): Observable<any> {
     return this.http.patch(`${this.endpoint}/users/update/${email}/${hungerValue}`, {});
+  }
+
+  //signout
+  signOut(): Observable<any> {
+    return this.http.get(`${this.endpoint}/users/logout`, {
+      withCredentials: true,
+    });
   }
 }

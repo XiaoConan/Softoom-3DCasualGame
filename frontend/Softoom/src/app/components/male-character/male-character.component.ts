@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { ApiService } from 'src/app/services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-male-character',
@@ -12,18 +13,30 @@ export class MaleCharacterComponent {
   fridge_visible: boolean = false;
   visible: boolean = false;
   hungerValue: number = 0;
+  isAuth: boolean = false;
 
-  constructor(private api: ApiService) {
-    this.api.getUser("jerry@gmail.com").subscribe((user) => {
+  constructor(private api: ApiService, private router: Router) {
+  }
+
+  ngOnInit(): void {
+    this.api.getUser().subscribe((user) => {
+      if (user) {
+        this.isAuth = true;
+        this.pageLoaded();
+      }
+    });
+  }
+
+  pageLoaded() {
+
+    this.api.getUser().subscribe((user) => {
       this.hungerValue = user.hungerValue;
     });
 
     setInterval(() => {
       this.hungerValue -= 1;
     }, 10000);
-  }
 
-  ngOnInit(): void {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xcfb665);
     const camera = new THREE.PerspectiveCamera(
@@ -216,8 +229,20 @@ export class MaleCharacterComponent {
   }
   closeFridge() {
     this.fridge_visible = false;
-    this.api.getUser("jerry@gmail.com").subscribe((user) => {
+    this.api.getUser().subscribe((user) => {
       this.hungerValue = user.hungerValue;
     });
+  }
+
+  signOut() {
+    this.api.getUser().subscribe((user) => {
+      if (user) {
+        console.log(user);
+      }
+    });
+    this.api.signOut().subscribe((res) => {
+      console.log(res);
+    });
+    this.router.navigate(['/']);
   }
 }

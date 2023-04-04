@@ -6,5 +6,7 @@
   <app-storage class="cols-6 dialog"></app-storage>
   <button class="btn dialog" (click)="closeFridge()">X</button>
 </ng-container>
-<div class="hungerValue" [ngStyle]="{'width': hungerValue+ 'px'}"></div>
+<div class="hungerValue" [ngStyle]="{'width': hungerValue+ 'px'}" *ngIf="isAuth"></div>
+<button class="signout-btn" (click)="signOut()" *ngIf="isAuth">Sign Out</button>
+<h1 *ngIf="!isAuth">You are not authorized, please sign in!</h1>
 

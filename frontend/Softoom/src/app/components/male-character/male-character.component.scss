@@ -28,10 +28,31 @@
 }
 .hungerValue {
   position: fixed;
+  // z-index: 1000;
   top: 20px;
   left: 40px;
   height: 10px;
   background-color: pink;
   border: 1px solid black;
   border-radius: 3px;
+}
+
+.signout-btn {
+  position: fixed;
+  top: 85%;
+  left: 85%;
+  border-radius: 10px;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+  font-size: 10px;
+  color: white;
+  background: #c1b3b6;
+  border: 2px solid white;
+  width: 70px;
+}
+
+.signout-btn:hover {
+  background: #00b7ef;
+  color: #ffffff;
+  cursor: pointer;
 }
