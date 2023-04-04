@@ -73,8 +73,6 @@ export class MaleCharacterComponent {
       }
     );
 
-
-
     //load the male role gltf model
 
     let model: THREE.Group;
