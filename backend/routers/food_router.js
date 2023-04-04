@@ -41,11 +41,19 @@ foodRouter.post("/order", async (req, res) => {
 
 //food storage
 foodRouter.post("/storage", async (req, res) => {
+  const user = await Users.findOne({
+    where: {
+      username: req.body.email,
+    },
+  });
+  if (!user) {
+    return res.status(404).json({ error: "User not found." });
+  }
   const food = Food.build({
     foodName: req.body.foodName,
     price: req.body.price,
     email: req.body.email,
-    userId: 17,
+    userId: user.id,
   });
   try {
     await food.save();

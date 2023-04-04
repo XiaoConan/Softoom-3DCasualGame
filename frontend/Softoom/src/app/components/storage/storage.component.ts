@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-storage',
@@ -14,11 +15,12 @@ export class StorageComponent {
   foodFour: number = 0;
   foodFive: number = 0;
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private cookieService: CookieService) {}
 
   ngOnInit(): void {
     //clear the fridge
-    this.api.getFood("jerry@gmail.com").subscribe(
+    const username = this.cookieService.get('username');
+    this.api.getFood(username).subscribe(
       (data) => {
         console.log(data);
         this.foodOne = data.foodOne;
@@ -34,7 +36,8 @@ export class StorageComponent {
   eatFoodOne() {
     if (this.foodOne > 0) {
       this.foodOne--;
-      this.api.deleteFood("Baking Bread", "jerry@gmail.com").subscribe(
+      const username = this.cookieService.get('username');
+      this.api.deleteFood("Baking Bread", username).subscribe(
         (data) => {
           console.log(data);
         },
@@ -48,7 +51,8 @@ export class StorageComponent {
   eatFoodTwo() {
     if (this.foodTwo > 0) {
       this.foodTwo--;
-      this.api.deleteFood("Grilled Sausage", "jerry@gmail.com").subscribe(
+      const username = this.cookieService.get('username');
+      this.api.deleteFood("Grilled Sausage", username).subscribe(
         (data) => {
           console.log(data);
         },
@@ -62,7 +66,8 @@ export class StorageComponent {
   eatFoodThree() {
     if (this.foodThree > 0) {
       this.foodThree--;
-      this.api.deleteFood("Coke", "jerry@gmail.com").subscribe(
+      const username = this.cookieService.get('username');
+      this.api.deleteFood("Coke", username).subscribe(
         (data) => {
           console.log(data);
         },
@@ -76,7 +81,8 @@ export class StorageComponent {
   eatFoodFour() {
     if (this.foodFour > 0) {
       this.foodFour--;
-      this.api.deleteFood("Pizza", "jerry@gmail.com").subscribe(
+      const username = this.cookieService.get('username');
+      this.api.deleteFood("Pizza", username).subscribe(
         (data) => {
           console.log(data);
         },
@@ -90,7 +96,8 @@ export class StorageComponent {
   eatFoodFive() {
     if (this.foodFive > 0) {
       this.foodFive--;
-      this.api.deleteFood("Hamburger", "jerry@gmail.com").subscribe(
+      const username = this.cookieService.get('username');
+      this.api.deleteFood("Hamburger", username).subscribe(
         (data) => {
           console.log(data);
         },

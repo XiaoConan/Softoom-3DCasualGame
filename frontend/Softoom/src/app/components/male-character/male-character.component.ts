@@ -3,6 +3,8 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-male-character',
@@ -15,12 +17,12 @@ export class MaleCharacterComponent {
   hungerValue: number = 0;
   isAuth: boolean = false;
 
-  constructor(private api: ApiService, private router: Router) {
+  constructor(private api: ApiService, private router: Router, private cookieService: CookieService) {
   }
 
   ngOnInit(): void {
     this.api.getUser().subscribe((user) => {
-      if (user) {
+      if (user != null && user.gender === "male") {
         this.isAuth = true;
         this.pageLoaded();
       }
@@ -136,7 +138,8 @@ export class MaleCharacterComponent {
 
           if (intersects.length > 0) {
             this.fridge_visible = true;
-            this.api.updateHungryValue("jerry@gmail,com", this.hungerValue);
+            const username = this.cookieService.get('username');
+            this.api.updateHungryValue(username, this.hungerValue);
 
           }
         });

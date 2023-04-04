@@ -7,7 +7,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-page.component.scss', './home-page-cols.scss'],
 })
 export class HomePageComponent {
-  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  constructor(private router: Router) {
+  }
+
+  ngOnInit(): void {
+  }
 }

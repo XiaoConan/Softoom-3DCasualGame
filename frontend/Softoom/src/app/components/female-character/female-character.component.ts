@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { ApiService } from 'src/app/services/api.service';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-female-character',
@@ -8,11 +11,31 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
   styleUrls: ['./female-character.component.scss'],
 })
 export class FemaleCharacterComponent {
+  fridge_visible: boolean = false;
   visible: boolean = false;
+  hungerValue: number = 0;
+  isAuth: boolean = false;
 
-  constructor() {}
+  constructor(private api: ApiService, private router: Router, private cookieService: CookieService) {}
 
   ngOnInit(): void {
+    this.api.getUser().subscribe((user) => {
+      if (user != null && user.gender === "female") {
+        this.isAuth = true;
+        this.pageLoaded();
+      }
+    });
+  }
+
+  pageLoaded() {
+    this.api.getUser().subscribe((user) => {
+      this.hungerValue = user.hungerValue;
+    });
+
+    setInterval(() => {
+      this.hungerValue -= 1;
+    }, 10000);
+
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffb399);
     const camera = new THREE.PerspectiveCamera(
@@ -31,11 +54,28 @@ export class FemaleCharacterComponent {
     renderer.setPixelRatio(window.devicePixelRatio * 2);
     document.body.appendChild(renderer.domElement);
 
+    //load the small model on top of hunger bar
+    let hunger_model: THREE.Group;
+    const hunger_loader = new GLTFLoader();
+    hunger_loader.load(
+      'assets/female-role/scene.gltf',
+      (role) => {
+        hunger_model = role.scene;
+        hunger_model.scale.set(0.05, 0.05, 0.05);
+        //set on the top left of the screen
+        hunger_model.position.set(-3, 4, 10.8);
+        scene.add(hunger_model);
+      },
+      undefined,
+      (error) => {
+        console.error(error);
+      }
+    );
+
     //load the female role gltf model
 
     let model: THREE.Group;
 
-    //load female role model
     const loader = new GLTFLoader();
     loader.load(
       'assets/female-role/scene.gltf',
@@ -78,6 +118,30 @@ export class FemaleCharacterComponent {
         freezer.scene.position.set(3, -0.5, 4.5);
 
         scene.add(freezer.scene);
+
+        // Create a Raycaster object
+        const raycaster2 = new THREE.Raycaster();
+
+        // Set up the click event handler
+        window.addEventListener('click', (event) => {
+          // Calculate the mouse position in normalized device coordinates
+          const mouse = new THREE.Vector2();
+          mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+          mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+          // Set the raycaster position based on the mouse position
+          raycaster2.setFromCamera(mouse, camera);
+
+          // Check if the ray intersects with the model
+          const intersects = raycaster2.intersectObject(freezer.scene);
+
+          if (intersects.length > 0) {
+            this.fridge_visible = true;
+            const username = this.cookieService.get('username');
+            this.api.updateHungryValue(username, this.hungerValue);
+
+          }
+        });
       },
       undefined,
       (error) => {
@@ -151,6 +215,11 @@ export class FemaleCharacterComponent {
 
     function animate() {
       requestAnimationFrame(animate);
+
+      //rotated the hunger model
+      if (hunger_model) {
+        hunger_model.rotation.y += 0.01;
+      }
       renderer.render(scene, camera);
     }
     animate();
@@ -158,5 +227,18 @@ export class FemaleCharacterComponent {
 
   closeFoodMenu() {
     this.visible = false;
+  }
+  closeFridge() {
+    this.fridge_visible = false;
+    this.api.getUser().subscribe((user) => {
+      this.hungerValue = user.hungerValue;
+    });
+  }
+
+  signOut() {
+    this.api.signOut().subscribe((res) => {
+      console.log(res);
+    });
+    this.router.navigate(['/']);
   }
 }
