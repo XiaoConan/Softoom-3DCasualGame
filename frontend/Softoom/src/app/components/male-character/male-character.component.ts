@@ -5,7 +5,6 @@ import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
-
 @Component({
   selector: 'app-male-character',
   templateUrl: './male-character.component.html',
@@ -236,14 +235,10 @@ export class MaleCharacterComponent {
   }
 
   signOut() {
-    this.api.getUser().subscribe((user) => {
-      if (user) {
-        console.log(user);
-      }
-    });
     this.api.signOut().subscribe((res) => {
-      console.log(res);
+      this.router.navigate(['/']).then(() => {
+        window.location.reload();
+      });
     });
-    this.router.navigate(['/']);
   }
 }

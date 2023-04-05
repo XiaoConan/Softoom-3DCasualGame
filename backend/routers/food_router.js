@@ -2,10 +2,15 @@ import { Router } from "express";
 import { Stripe } from "stripe";
 import { Food } from "../models/food.js";
 import { Users } from "../models/users.js";
+import sgMail from "@sendgrid/mail";
 
 const stripe = new Stripe(
   "sk_test_51Mr6f4GoTMrFoklNklJ4mEmG2mtYbtNEuJAxm7zAw2KF1yeW0mTGfz8DOmsbqQ7fJmr0vobdb2GEMS0ldz5RSNs500xFehDdUB"
 );
+
+const API_KEY = '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';
+
+sgMail.setApiKey(API_KEY);
 
 export const foodRouter = Router();
 
@@ -27,6 +32,14 @@ foodRouter.post("/order", async (req, res) => {
       currency: "CAD",
       customer: customer.id,
     });
+
+    const msg = {
+      to: token.email,
+      from: 'SoftoomApp@gmail.com',
+      subject: 'Food Order Confirmation',
+      text: 'Your food order has been confirmed! You spend ' + amount + ' CAD on your order.',
+    };
+    sgMail.send(msg);
 
     return res.json({
       data: "Payment Successful!",
