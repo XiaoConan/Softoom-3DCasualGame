@@ -8,7 +8,6 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./storage.component.scss', './storage-cols.scss'],
 })
 export class StorageComponent {
-
   foodOne: number = 0;
   foodTwo: number = 0;
   foodThree: number = 0;
@@ -20,16 +19,13 @@ export class StorageComponent {
   ngOnInit(): void {
     //clear the fridge
     const username = this.cookieService.get('username');
-    this.api.getFood(username).subscribe(
-      (data) => {
-        console.log(data);
-        this.foodOne = data.foodOne;
-        this.foodTwo = data.foodTwo;
-        this.foodThree = data.foodThree;
-        this.foodFour = data.foodFour;
-        this.foodFive = data.foodFive;
-      }
-    );
+    this.api.getFood(username).subscribe((data) => {
+      this.foodOne = data.foodOne;
+      this.foodTwo = data.foodTwo;
+      this.foodThree = data.foodThree;
+      this.foodFour = data.foodFour;
+      this.foodFive = data.foodFive;
+    });
   }
 
   //eat the food
@@ -37,14 +33,7 @@ export class StorageComponent {
     if (this.foodOne > 0) {
       this.foodOne--;
       const username = this.cookieService.get('username');
-      this.api.deleteFood("Baking Bread", username).subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      this.api.deleteFood('Baking Bread', username);
     }
   }
 
@@ -52,14 +41,7 @@ export class StorageComponent {
     if (this.foodTwo > 0) {
       this.foodTwo--;
       const username = this.cookieService.get('username');
-      this.api.deleteFood("Grilled Sausage", username).subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      this.api.deleteFood('Grilled Sausage', username);
     }
   }
 
@@ -67,14 +49,7 @@ export class StorageComponent {
     if (this.foodThree > 0) {
       this.foodThree--;
       const username = this.cookieService.get('username');
-      this.api.deleteFood("Coke", username).subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      this.api.deleteFood('Coke', username);
     }
   }
 
@@ -82,14 +57,7 @@ export class StorageComponent {
     if (this.foodFour > 0) {
       this.foodFour--;
       const username = this.cookieService.get('username');
-      this.api.deleteFood("Pizza", username).subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      this.api.deleteFood('Pizza', username);
     }
   }
 
@@ -97,15 +65,7 @@ export class StorageComponent {
     if (this.foodFive > 0) {
       this.foodFive--;
       const username = this.cookieService.get('username');
-      this.api.deleteFood("Hamburger", username).subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      this.api.deleteFood('Hamburger', username);
     }
   }
-
 }

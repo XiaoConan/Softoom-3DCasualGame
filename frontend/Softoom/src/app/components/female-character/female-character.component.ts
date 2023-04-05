@@ -16,11 +16,15 @@ export class FemaleCharacterComponent {
   hungerValue: number = 0;
   isAuth: boolean = false;
 
-  constructor(private api: ApiService, private router: Router, private cookieService: CookieService) {}
+  constructor(
+    private api: ApiService,
+    private router: Router,
+    private cookieService: CookieService
+  ) {}
 
   ngOnInit(): void {
     this.api.getUser().subscribe((user) => {
-      if (user != null && user.gender === "female") {
+      if (user != null && user.gender === 'female') {
         this.isAuth = true;
         this.pageLoaded();
       }
@@ -61,7 +65,7 @@ export class FemaleCharacterComponent {
       'assets/female-role/scene.gltf',
       (role) => {
         hunger_model = role.scene;
-        hunger_model.scale.set(0.05, 0.05, 0.05);
+        hunger_model.scale.set(0.06, 0.06, 0.06);
         //set on the top left of the screen
         hunger_model.position.set(-3, 4, 10.8);
         scene.add(hunger_model);
@@ -97,11 +101,9 @@ export class FemaleCharacterComponent {
     room_loader.load(
       'assets/room-one/scene.gltf',
       (room) => {
-
         room.scene.scale.set(0.025, 0.025, 0.025);
         room.scene.position.set(0, -1, 1);
         scene.add(room.scene);
-
       },
       undefined,
       (error) => {
@@ -139,7 +141,6 @@ export class FemaleCharacterComponent {
             this.fridge_visible = true;
             const username = this.cookieService.get('username');
             this.api.updateHungryValue(username, this.hungerValue);
-
           }
         });
       },
@@ -193,7 +194,7 @@ export class FemaleCharacterComponent {
 
     //player model movement
     window.addEventListener('keydown', (event) => {
-      if (event.key === 'w' ) {
+      if (event.key === 'w') {
         model.position.x -= 0.1;
         //let the model face to the direction of movement
         model.rotation.y = (3 * Math.PI) / 2;
@@ -211,7 +212,6 @@ export class FemaleCharacterComponent {
         model.rotation.y = Math.PI;
       }
     });
-
 
     function animate() {
       requestAnimationFrame(animate);
@@ -237,8 +237,9 @@ export class FemaleCharacterComponent {
 
   signOut() {
     this.api.signOut().subscribe((res) => {
-      console.log(res);
+      this.router.navigate(['/']).then(() => {
+        window.location.reload();
+      });
     });
-    this.router.navigate(['/']);
   }
 }

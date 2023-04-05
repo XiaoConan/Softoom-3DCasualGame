@@ -17,7 +17,7 @@ export class SignInPageComponent implements OnInit {
     private fb: FormBuilder,
     private api: ApiService,
     private router: Router,
-    private cookieService: CookieService,
+    private cookieService: CookieService
   ) {
     this.signInForm = this.fb.group({
       username: ['', [Validators.required]],

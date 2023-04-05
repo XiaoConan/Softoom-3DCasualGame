@@ -49,8 +49,6 @@ export class FoodMenuComponent {
       key: 'pk_test_51Mr6f4GoTMrFoklNTppHZFZAVC5UqG6cNYWQ2E29RV7jFust3VL2j2oLgreaRp9gOvy8KlYnZXYGuL5U9Tzp62iJ00F1jDDt8M',
       locale: 'auto',
       token: function (stripeToken: any) {
-        console.log(stripeToken);
-
         paymentStripe(stripeToken);
       },
     });
@@ -69,62 +67,27 @@ export class FoodMenuComponent {
           //store the food in the database
           if (this.foodOne > 0) {
             for (let i = 0; i < this.foodOne; i++) {
-              this.api.storeFood("Baking Bread", 3, token.email).subscribe(
-                (data) => {
-                  console.log(data);
-                },
-                (error) => {
-                  console.log(error);
-                }
-              );
+              this.api.storeFood('Baking Bread', 3, token.email);
             }
           }
           if (this.foodTwo > 0) {
             for (let i = 0; i < this.foodTwo; i++) {
-              this.api.storeFood("Grilled Sausage", 3, token.email).subscribe(
-                (data) => {
-                  console.log(data);
-                },
-                (error) => {
-                  console.log(error);
-                }
-              );
+              this.api.storeFood('Grilled Sausage', 3, token.email);
             }
           }
           if (this.foodThree > 0) {
             for (let i = 0; i < this.foodThree; i++) {
-              this.api.storeFood("Coke", 1, token.email).subscribe(
-                (data) => {
-                  console.log(data);
-                },
-                (error) => {
-                  console.log(error);
-                }
-              );
+              this.api.storeFood('Coke', 1, token.email);
             }
           }
           if (this.foodFour > 0) {
             for (let i = 0; i < this.foodFour; i++) {
-              this.api.storeFood("Pizza", 7, token.email).subscribe(
-                (data) => {
-                  console.log(data);
-                },
-                (error) => {
-                  console.log(error);
-                }
-              );
+              this.api.storeFood('Pizza', 7, token.email);
             }
           }
           if (this.foodFive > 0) {
             for (let i = 0; i < this.foodFive; i++) {
-              this.api.storeFood("Hamburger", 5, token.email).subscribe(
-                (data) => {
-                  console.log(data);
-                },
-                (error) => {
-                  console.log(error);
-                }
-              );
+              this.api.storeFood('Hamburger', 5, token.email);
             }
           }
           this.reset();

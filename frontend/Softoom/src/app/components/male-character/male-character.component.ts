@@ -16,12 +16,15 @@ export class MaleCharacterComponent {
   hungerValue: number = 0;
   isAuth: boolean = false;
 
-  constructor(private api: ApiService, private router: Router, private cookieService: CookieService) {
-  }
+  constructor(
+    private api: ApiService,
+    private router: Router,
+    private cookieService: CookieService
+  ) {}
 
   ngOnInit(): void {
     this.api.getUser().subscribe((user) => {
-      if (user != null && user.gender === "male") {
+      if (user != null && user.gender === 'male') {
         this.isAuth = true;
         this.pageLoaded();
       }
@@ -29,7 +32,6 @@ export class MaleCharacterComponent {
   }
 
   pageLoaded() {
-
     this.api.getUser().subscribe((user) => {
       this.hungerValue = user.hungerValue;
     });
@@ -139,7 +141,6 @@ export class MaleCharacterComponent {
             this.fridge_visible = true;
             const username = this.cookieService.get('username');
             this.api.updateHungryValue(username, this.hungerValue);
-
           }
         });
       },
@@ -191,7 +192,7 @@ export class MaleCharacterComponent {
     camera.position.x = 7;
     camera.lookAt(scene.position);
 
-        //player model movement
+    //player model movement
     window.addEventListener('keydown', (event) => {
       if (event.key === 'w') {
         model.position.x -= 0.1;

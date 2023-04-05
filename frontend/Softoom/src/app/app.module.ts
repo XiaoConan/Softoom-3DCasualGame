@@ -13,6 +13,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FoodMenuComponent } from './components/food-menu/food-menu.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StorageComponent } from './components/storage/storage.component';
+import { AuthModule } from '@auth0/auth0-angular';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,10 @@ import { StorageComponent } from './components/storage/storage.component';
     FormsModule,
     HttpClientModule,
     MatDialogModule,
+    AuthModule.forRoot({
+      domain: 'dev-ls4ookwxd2iqufde.us.auth0.com',
+      clientId: 'OZOKua17FKuqqA647WQKzPJTHgI47Cou',
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

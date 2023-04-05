@@ -8,7 +8,8 @@ const stripe = new Stripe(
   "sk_test_51Mr6f4GoTMrFoklNklJ4mEmG2mtYbtNEuJAxm7zAw2KF1yeW0mTGfz8DOmsbqQ7fJmr0vobdb2GEMS0ldz5RSNs500xFehDdUB"
 );
 
-const API_KEY = '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';
+const API_KEY =
+  "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";
 
 sgMail.setApiKey(API_KEY);
 
@@ -35,9 +36,12 @@ foodRouter.post("/order", async (req, res) => {
 
     const msg = {
       to: token.email,
-      from: 'SoftoomApp@gmail.com',
-      subject: 'Food Order Confirmation',
-      text: 'Your food order has been confirmed! You spend ' + amount + ' CAD on your order.',
+      from: "SoftoomApp@gmail.com",
+      subject: "Food Order Confirmation",
+      text:
+        "Your food order has been confirmed! You spend " +
+        amount +
+        " CAD on your order.",
     };
     sgMail.send(msg);
 
@@ -45,7 +49,6 @@ foodRouter.post("/order", async (req, res) => {
       data: "Payment Successful!",
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       error: "Payment Failed!",
     });
@@ -71,11 +74,9 @@ foodRouter.post("/storage", async (req, res) => {
   try {
     await food.save();
   } catch (error) {
-    console.log(error);
     return res.status(422).json({ error: "Food creation failed." });
   }
   return res.json({ message: "Food created successfully." });
-  
 });
 
 //get all food in the user's fridge
@@ -107,11 +108,11 @@ foodRouter.get("/fridge/:email", async (req, res) => {
   const foodFive = await Food.count({
     where: {
       email: req.params.email,
-      foodName: "Hamberger",
+      foodName: "Hamburger",
     },
   });
 
-  return res.json({foodOne, foodTwo, foodThree, foodFour, foodFive});
+  return res.json({ foodOne, foodTwo, foodThree, foodFour, foodFive });
 });
 
 //delete food from the user's fridge
@@ -129,10 +130,13 @@ foodRouter.delete("/fridge/:foodName/:email", async (req, res) => {
     await food.destroy();
     const user = await Users.findOne({
       where: {
-        email: req.params.email,
+        username: req.params.email,
       },
     });
-    if (req.params.foodName === "Baking Bread" || req.params.foodName === "Grilled Sausage") {
+    if (
+      req.params.foodName === "Baking Bread" ||
+      req.params.foodName === "Grilled Sausage"
+    ) {
       if (user.hungerValue + 30 >= 100) {
         user.hungerValue = 100;
       } else {
@@ -160,8 +164,6 @@ foodRouter.delete("/fridge/:foodName/:email", async (req, res) => {
     await user.save();
     return res.json({ message: "Food deleted successfully." });
   } catch (error) {
-    console.log(error);
     return res.status(422).json({ error: "Food deletion failed." });
   }
 });
-

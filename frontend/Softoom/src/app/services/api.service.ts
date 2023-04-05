@@ -58,7 +58,9 @@ export class ApiService {
 
   //delete food from fridge
   deleteFood(foodName: String, email: String): Observable<any> {
-    return this.http.delete(`${this.endpoint}/food/fridge/${foodName}/${email}`);
+    return this.http.delete(
+      `${this.endpoint}/food/fridge/${foodName}/${email}`
+    );
   }
 
   //get user info from email
@@ -70,7 +72,10 @@ export class ApiService {
 
   //update user info
   updateHungryValue(email: String, hungerValue: number): Observable<any> {
-    return this.http.patch(`${this.endpoint}/users/update/${email}/${hungerValue}`, {});
+    return this.http.patch(
+      `${this.endpoint}/users/update/${email}/${hungerValue}`,
+      {}
+    );
   }
 
   //signout

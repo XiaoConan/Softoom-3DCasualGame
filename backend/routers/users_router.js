@@ -18,9 +18,10 @@ usersRouter.post("/signup", async (req, res) => {
   try {
     await user.save();
   } catch (error) {
+    console.log(error);
     return res.status(422).json({ error: "User creation failed." });
   }
-  return res.json({ username: user.username });
+  return res.json({ user });
 });
 
 //user login
@@ -49,7 +50,6 @@ usersRouter.get("/me", async (req, res) => {
   const user = await Users.findOne({
     where: {
       username: req.cookies.username,
-
     },
   });
   if (!user) {
@@ -84,4 +84,3 @@ usersRouter.get("/logout", async (req, res) => {
   res.clearCookie("username");
   return res.json({ message: "User logged out successfully." });
 });
-
