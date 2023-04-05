@@ -2,6 +2,7 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -15,10 +16,12 @@ export class SignUpPageComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private api: ApiService,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) {
     this.signUpForm = this.fb.group({
-      username: ['', Validators.required],
+      //username must be an email
+      username: ['', Validators.email],
       password: ['', Validators.required],
       gender: ['', Validators.required],
       roomType: ['', Validators.required],
@@ -30,7 +33,7 @@ export class SignUpPageComponent implements OnInit {
   signUp() {
     //check if the form is valid
     if (this.signUpForm.invalid) {
-      this.error = 'Error: Please fill in all the fields';
+      this.error = 'Error: Please fill all the fields with valid data';
       return;
     }
 
@@ -45,8 +48,10 @@ export class SignUpPageComponent implements OnInit {
         (user) => {
           this.error = '';
           if (user.gender === 'female') {
+            this.cookieService.set('username', user.user.username);
             this.router.navigate(['/room/female']);
           } else {
+            this.cookieService.set('username', user.user.username);
             this.router.navigate(['/room/male']);
           }
         },

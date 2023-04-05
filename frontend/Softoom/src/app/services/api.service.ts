@@ -41,4 +41,47 @@ export class ApiService {
       token,
     });
   }
+
+  //store food
+  storeFood(foodName: String, price: number, email: String): Observable<any> {
+    return this.http.post(`${this.endpoint}/food/storage`, {
+      foodName,
+      price,
+      email,
+    });
+  }
+
+  //get all food in the user's fridge
+  getFood(email: String): Observable<any> {
+    return this.http.get(`${this.endpoint}/food/fridge/${email}`);
+  }
+
+  //delete food from fridge
+  deleteFood(foodName: String, email: String): Observable<any> {
+    return this.http.delete(
+      `${this.endpoint}/food/fridge/${foodName}/${email}`
+    );
+  }
+
+  //get user info from email
+  getUser(): Observable<any> {
+    return this.http.get(`${this.endpoint}/users/me`, {
+      withCredentials: true,
+    });
+  }
+
+  //update user info
+  updateHungryValue(email: String, hungerValue: number): Observable<any> {
+    return this.http.patch(
+      `${this.endpoint}/users/update/${email}/${hungerValue}`,
+      {}
+    );
+  }
+
+  //signout
+  signOut(): Observable<any> {
+    return this.http.get(`${this.endpoint}/users/logout`, {
+      withCredentials: true,
+    });
+  }
 }
