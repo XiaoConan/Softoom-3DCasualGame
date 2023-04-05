@@ -4,10 +4,14 @@ import { sequelize } from "./datasource.js";
 import cors from "cors";
 import { foodRouter } from "./routers/food_router.js";
 import { usersRouter } from "./routers/users_router.js";
+import cookieParser from "cookie-parser";
 
 const PORT = 3000;
+
 export const app = express();
 app.use(bodyParser.json());
+
+app.use(cookieParser());
 
 const corsOptions = {
   origin: "http://localhost:4200",

@@ -49,17 +49,6 @@ export class FoodMenuComponent {
       key: 'pk_test_51Mr6f4GoTMrFoklNTppHZFZAVC5UqG6cNYWQ2E29RV7jFust3VL2j2oLgreaRp9gOvy8KlYnZXYGuL5U9Tzp62iJ00F1jDDt8M',
       locale: 'auto',
       token: function (stripeToken: any) {
-        console.log(stripeToken);
-
-        // //send the array of all food quantities to the backend
-        // let foodQuantities = [
-        //   this.foodOne,
-        //   this.foodTwo,
-        //   this.foodThree,
-        //   this.foodFour,
-        //   this.foodFive,
-        // ];
-
         paymentStripe(stripeToken);
       },
     });
@@ -74,6 +63,34 @@ export class FoodMenuComponent {
             status!.innerHTML = '';
             status!.classList.remove('fade-out');
           }, 5000);
+
+          //store the food in the database
+          if (this.foodOne > 0) {
+            for (let i = 0; i < this.foodOne; i++) {
+              this.api.storeFood('Baking Bread', 3, token.email);
+            }
+          }
+          if (this.foodTwo > 0) {
+            for (let i = 0; i < this.foodTwo; i++) {
+              this.api.storeFood('Grilled Sausage', 3, token.email);
+            }
+          }
+          if (this.foodThree > 0) {
+            for (let i = 0; i < this.foodThree; i++) {
+              this.api.storeFood('Coke', 1, token.email);
+            }
+          }
+          if (this.foodFour > 0) {
+            for (let i = 0; i < this.foodFour; i++) {
+              this.api.storeFood('Pizza', 7, token.email);
+            }
+          }
+          if (this.foodFive > 0) {
+            for (let i = 0; i < this.foodFive; i++) {
+              this.api.storeFood('Hamburger', 5, token.email);
+            }
+          }
+          this.reset();
         },
         (error) => {
           const status = document.getElementById('status');
@@ -159,11 +176,11 @@ export class FoodMenuComponent {
   //get total price
   getTotalPrice() {
     this.totalPrice =
-      this.foodOne * 3.99 +
-      this.foodTwo * 3.99 +
-      this.foodThree * 1.99 +
-      this.foodFour * 7.99 +
-      this.foodFive * 5.99;
+      this.foodOne * 3 +
+      this.foodTwo * 3 +
+      this.foodThree * 1 +
+      this.foodFour * 7 +
+      this.foodFive * 5;
     this.formattedTotalPrice = this.totalPrice.toFixed(2);
   }
 

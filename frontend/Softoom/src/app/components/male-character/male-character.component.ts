@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { MatDialog } from '@angular/material/dialog';
-import { FoodMenuComponent } from '../food-menu/food-menu.component';
+import { ApiService } from 'src/app/services/api.service';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-male-character',
@@ -10,11 +11,35 @@ import { FoodMenuComponent } from '../food-menu/food-menu.component';
   styleUrls: ['./male-character.component.scss'],
 })
 export class MaleCharacterComponent {
+  fridge_visible: boolean = false;
   visible: boolean = false;
+  hungerValue: number = 0;
+  isAuth: boolean = false;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private api: ApiService,
+    private router: Router,
+    private cookieService: CookieService
+  ) {}
 
   ngOnInit(): void {
+    this.api.getUser().subscribe((user) => {
+      if (user != null && user.gender === 'male') {
+        this.isAuth = true;
+        this.pageLoaded();
+      }
+    });
+  }
+
+  pageLoaded() {
+    this.api.getUser().subscribe((user) => {
+      this.hungerValue = user.hungerValue;
+    });
+
+    setInterval(() => {
+      this.hungerValue -= 1;
+    }, 10000);
+
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xcfb665);
     const camera = new THREE.PerspectiveCamera(
@@ -32,6 +57,24 @@ export class MaleCharacterComponent {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio * 2);
     document.body.appendChild(renderer.domElement);
+
+    //load the small model on top of hunger bar
+    let hunger_model: THREE.Group;
+    const hunger_loader = new GLTFLoader();
+    hunger_loader.load(
+      'assets/male-role/scene.gltf',
+      (role) => {
+        hunger_model = role.scene;
+        hunger_model.scale.set(0.05, 0.05, 0.05);
+        //set on the top left of the screen
+        hunger_model.position.set(-3, 4, 10.8);
+        scene.add(hunger_model);
+      },
+      undefined,
+      (error) => {
+        console.error(error);
+      }
+    );
 
     //load the male role gltf model
 
@@ -77,6 +120,29 @@ export class MaleCharacterComponent {
         freezer.scene.rotation.y = -1.5;
 
         scene.add(freezer.scene);
+
+        // Create a Raycaster object
+        const raycaster2 = new THREE.Raycaster();
+
+        // Set up the click event handler
+        window.addEventListener('click', (event) => {
+          // Calculate the mouse position in normalized device coordinates
+          const mouse = new THREE.Vector2();
+          mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+          mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+          // Set the raycaster position based on the mouse position
+          raycaster2.setFromCamera(mouse, camera);
+
+          // Check if the ray intersects with the model
+          const intersects = raycaster2.intersectObject(freezer.scene);
+
+          if (intersects.length > 0) {
+            this.fridge_visible = true;
+            const username = this.cookieService.get('username');
+            this.api.updateHungryValue(username, this.hungerValue);
+          }
+        });
       },
       undefined,
       (error) => {
@@ -126,8 +192,33 @@ export class MaleCharacterComponent {
     camera.position.x = 7;
     camera.lookAt(scene.position);
 
+    //player model movement
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'w') {
+        model.position.x -= 0.1;
+        //let the model face to the direction of movement
+        model.rotation.y = (3 * Math.PI) / 2;
+      }
+      if (event.key === 's') {
+        model.position.x += 0.1;
+        model.rotation.y = Math.PI / 2;
+      }
+      if (event.key === 'a') {
+        model.position.z += 0.1;
+        model.rotation.y = 0;
+      }
+      if (event.key === 'd') {
+        model.position.z -= 0.1;
+        model.rotation.y = Math.PI;
+      }
+    });
+
     function animate() {
       requestAnimationFrame(animate);
+      //rotated the hunger model
+      if (hunger_model) {
+        hunger_model.rotation.y += 0.01;
+      }
 
       renderer.render(scene, camera);
     }
@@ -136,5 +227,19 @@ export class MaleCharacterComponent {
 
   closeFoodMenu() {
     this.visible = false;
+  }
+  closeFridge() {
+    this.fridge_visible = false;
+    this.api.getUser().subscribe((user) => {
+      this.hungerValue = user.hungerValue;
+    });
+  }
+
+  signOut() {
+    this.api.signOut().subscribe((res) => {
+      this.router.navigate(['/']).then(() => {
+        window.location.reload();
+      });
+    });
   }
 }

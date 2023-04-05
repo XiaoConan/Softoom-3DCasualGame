@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-sign-in-page',
@@ -15,7 +16,8 @@ export class SignInPageComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private api: ApiService,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) {
     this.signInForm = this.fb.group({
       username: ['', [Validators.required]],
@@ -38,9 +40,11 @@ export class SignInPageComponent implements OnInit {
       .subscribe(
         (user) => {
           this.error = '';
-          if (user.gender === 'female') {
+          if (user.user.gender === 'female') {
+            this.cookieService.set('username', user.user.username);
             this.router.navigate(['/room/female']);
           } else {
+            this.cookieService.set('username', user.user.username);
             this.router.navigate(['/room/male']);
           }
         },
