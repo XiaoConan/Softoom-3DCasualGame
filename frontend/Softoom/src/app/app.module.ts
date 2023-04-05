@@ -14,6 +14,7 @@ import { FoodMenuComponent } from './components/food-menu/food-menu.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StorageComponent } from './components/storage/storage.component';
 import { AuthModule } from '@auth0/auth0-angular';
+import { CreditComponent } from './components/credit/credit.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AuthModule } from '@auth0/auth0-angular';
     SignUpPageComponent,
     FoodMenuComponent,
     StorageComponent,
+    CreditComponent,
   ],
   imports: [
     BrowserModule,
