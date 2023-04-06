@@ -37,7 +37,9 @@ export class FemaleCharacterComponent {
     });
 
     setInterval(() => {
-      this.hungerValue -= 1;
+      if (this.hungerValue > 0) {
+        this.hungerValue -= 1;
+      }
     }, 10000);
 
     const scene = new THREE.Scene();
