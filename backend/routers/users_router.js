@@ -42,7 +42,6 @@ usersRouter.post("/signin", async (req, res) => {
 
 //get user info
 usersRouter.get("/me", async (req, res) => {
-  console.log(req.cookies.username);
   if (!req.cookies.username) {
     return res.status(401).json({ error: "You are not authenticated." });
   }
@@ -71,6 +70,7 @@ usersRouter.patch("/update/:username/:value", async (req, res) => {
   try {
     user.hungerValue = req.params.value;
     await user.save();
+    console.log(user);
     return res.json(user);
   } catch (error) {
     return res.status(422).json({ error: "User update failed." });
@@ -80,7 +80,6 @@ usersRouter.patch("/update/:username/:value", async (req, res) => {
 //user logout
 usersRouter.get("/logout", async (req, res) => {
   //clear cookie
-  console.log(req.cookies.username);
   res.clearCookie("username");
   return res.json({ message: "User logged out successfully." });
 });

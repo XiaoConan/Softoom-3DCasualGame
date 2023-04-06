@@ -117,6 +117,7 @@ foodRouter.get("/fridge/:email", async (req, res) => {
 
 //delete food from the user's fridge
 foodRouter.delete("/fridge/:foodName/:email", async (req, res) => {
+  console.log(req.params.foodName);
   const food = await Food.findOne({
     where: {
       email: req.params.email,
@@ -162,6 +163,7 @@ foodRouter.delete("/fridge/:foodName/:email", async (req, res) => {
       }
     }
     await user.save();
+    console.log(user.hungerValue);
     return res.json({ message: "Food deleted successfully." });
   } catch (error) {
     return res.status(422).json({ error: "Food deletion failed." });

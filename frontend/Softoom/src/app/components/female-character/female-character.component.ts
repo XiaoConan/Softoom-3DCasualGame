@@ -236,6 +236,9 @@ export class FemaleCharacterComponent {
   }
 
   signOut() {
+    const username = this.cookieService.get('username');
+    this.api.updateHungryValue(username, this.hungerValue);
+
     this.api.signOut().subscribe((res) => {
       this.router.navigate(['/']).then(() => {
         window.location.reload();

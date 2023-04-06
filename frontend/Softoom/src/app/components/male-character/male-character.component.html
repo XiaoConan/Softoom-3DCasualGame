@@ -8,7 +8,7 @@
 </ng-container>
 <div
   class="hungerValue"
-  [ngStyle]="{ width: hungerValue + 'px' }"
+  [ngStyle]="{ width: hungerValue * 3 + 'px' }"
   *ngIf="isAuth"
 ></div>
 <button class="signout-btn" (click)="signOut()" *ngIf="isAuth">Sign Out</button>

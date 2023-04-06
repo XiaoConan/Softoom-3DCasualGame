@@ -37,7 +37,9 @@ export class MaleCharacterComponent {
     });
 
     setInterval(() => {
-      this.hungerValue -= 1;
+      if (this.hungerValue > 0) {
+        this.hungerValue -= 1;
+      }
     }, 10000);
 
     const scene = new THREE.Scene();
@@ -236,6 +238,9 @@ export class MaleCharacterComponent {
   }
 
   signOut() {
+    const username = this.cookieService.get('username');
+    this.api.updateHungryValue(username, this.hungerValue);
+
     this.api.signOut().subscribe((res) => {
       this.router.navigate(['/']).then(() => {
         window.location.reload();

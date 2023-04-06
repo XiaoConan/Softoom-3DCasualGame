@@ -9,7 +9,7 @@
 }
 
 .menu-form .form-title {
-  font-size: 10px;
+  font-size: 30px;
   font-weight: bold;
   padding: 3px 0px 5px 0px;
   text-align: center;
@@ -19,7 +19,7 @@
 }
 
 .menu-form .form-label {
-  font-size: 10px;
+  font-size: 20px;
   font-weight: bold;
   padding: 5px 0px 5px 0px;
   color: #3c3d3f;
@@ -28,24 +28,24 @@
 }
 
 .menu-form .form-element {
-  font-size: 10px;
+  font-size: 20px;
   border-bottom: 2px solid #3c3d3f;
   background: white;
   width: 100%;
 }
 
 .btn {
-  border-radius: 10px;
+  border-radius: 30px;
   text-align: center;
   font-family: "Comfortaa", cursive;
-  font-size: 10px;
-  height: 20px;
-  width: 20px;
+  font-size: 20px;
+  height: 40px;
+  width: 40px;
   color: white;
   background: #c1b3b6;
   border: 2px solid white;
-  margin-left: -15px;
-  margin-top: 5px;
+  margin-left: -30px;
+  margin-top: 15px;
 }
 
 .btn:hover {
@@ -58,10 +58,12 @@
   border-radius: 10px;
   text-align: center;
   font-family: "Comfortaa", cursive;
-  font-size: 10px;
+  font-size: 20px;
   color: white;
   background: #c1b3b6;
   border: 2px solid white;
+  padding: 10px 0px 10px 0px;
+  margin: 10px 0px 10px 0px;
 }
 
 .submit-btn:hover {
@@ -80,7 +82,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: #80ff27;
-  font-size: 30px;
+  font-size: 50px;
   font-weight: bold;
 }
 
