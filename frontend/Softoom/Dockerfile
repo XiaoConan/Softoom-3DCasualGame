@@ -2,7 +2,7 @@
 # basically, this compiles the Angular project to static HTML and js files.
 FROM node:16-alpine as build
 WORKDIR /app
-COPY ..
+COPY . .
 RUN npm install
 RUN npm run build
 
