@@ -1,6 +1,6 @@
 # Build the Angular App
 # basically, this compiles the Angular project to static HTML and js files.
-FROM node:14-alpine3.14 as build
+FROM node:16-alpine as build
 WORKDIR /app
 COPY package.json ./
 COPY package-lock.json ./
