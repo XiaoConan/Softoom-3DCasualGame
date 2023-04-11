@@ -14,8 +14,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: "*",
-  credentials: false,
+  origin: "https://j.softoom.space",
+  credentials: true,
 };
 app.use(cors(corsOptions));
 
