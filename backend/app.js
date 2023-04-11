@@ -14,8 +14,10 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: "http://j.softoom.space",
-  credentials: true,
+  AccessControlAllowOrigin: "http://j.softoom.space",
+  AccessControlAllowHeaders: "Origin, X-Requested-With, Content-Type, Accept",
+  AccessControlAllowMethods: "GET, POST, PUT, DELETE, OPTIONS",
+  AccessControlAllowCredentials: true,
 };
 app.use(cors(corsOptions));
 
