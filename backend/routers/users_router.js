@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 
 export const usersRouter = Router();
 
+
 //user sign up
 usersRouter.post("/signup", async (req, res) => {
   const user = Users.build({
