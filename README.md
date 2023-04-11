@@ -46,3 +46,15 @@ the feeling of living in a cozy and comfortable room. <br/>
 ### video link
 
 https://youtu.be/RDJMhaDrBFE
+
+### Manually Set Up On localhost
+Go to develop branch (main is trying to deploy)<br/>
+Frontend:<br/>
+cd frontend/Softoom<br/>
+npm install<br/>
+npm run ng serve<br/>
+Backend:<br/>
+cd backend<br/>
+npm install<br/>
+npx nodemon app.js<br/>
+Then the web app will be served on http://localhost:4200/
