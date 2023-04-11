@@ -23,6 +23,8 @@ services:
       - ./acme:/etc/acme.sh
     environment:
       - DEFAULT_EMAIL=HsupermarioM@gmail.com
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+
   frontend:
     image: ghcr.io/uoft-utsc-cs-sandbox/softoom-frontend-xiaoconan
     container_name: frontend
