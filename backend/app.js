@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: "http://localhost:4200",
+  origin: "http://j.softoom.space",
   credentials: true,
 };
 app.use(cors(corsOptions));
@@ -37,5 +37,5 @@ app.use("/users", usersRouter);
 
 app.listen(PORT, (err) => {
   if (err) console.log(err);
-  else console.log("HTTP server on http://localhost:%s", PORT);
+  else console.log("HTTP server on http://j.softoom.space", PORT);
 });

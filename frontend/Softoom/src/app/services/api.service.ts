@@ -7,7 +7,7 @@ import { Stripe } from '@stripe/stripe-js';
   providedIn: 'root',
 })
 export class ApiService {
-  endpoint = 'http://localhost:3000';
+  endpoint = 'http://api.j.softoom.space';
 
   constructor(private http: HttpClient) {}
 
