@@ -9,7 +9,6 @@ on:
     paths:
       - backend/**
 
-
 env:
   IMAGE_NAME: softoom-backend-xiaoconan
 
