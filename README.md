@@ -48,6 +48,7 @@ the feeling of living in a cozy and comfortable room. <br/>
 https://youtu.be/RDJMhaDrBFE
 
 ### Manually Set Up On localhost
+
 Go to develop branch (main is trying to deploy)<br/>
 Frontend:<br/>
 cd frontend/Softoom<br/>
