@@ -13,17 +13,11 @@ app.use(bodyParser.json());
 
 app.use(cookieParser());
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://j.softoom.space");
-  res.header("Access-Control-Allow-Credentials", true);
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
-
+const corsOptions = {
+  origin: "http://j.softoom.space",
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 app.use(function (req, res, next) {
   console.log("HTTP request", req.method, req.url, req.body);
