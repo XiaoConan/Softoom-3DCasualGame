@@ -9,15 +9,16 @@ import cookieParser from "cookie-parser";
 const PORT = 3000;
 
 export const app = express();
-app.use(bodyParser.json());
-
-app.use(cookieParser());
 
 const corsOptions = {
   AccessControlAllowOrigin: "https://j.softoom.space",
   AccessControlAllowCredentials: true,
 };
 app.use(cors(corsOptions));
+
+app.use(bodyParser.json());
+
+app.use(cookieParser());
 
 app.use(function (req, res, next) {
   console.log("HTTP request", req.method, req.url, req.body);
