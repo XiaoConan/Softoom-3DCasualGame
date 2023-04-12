@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,7 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-page.component.scss', './home-page-cols.scss'],
 })
 export class HomePageComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private cookieService: CookieService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // clear all cookies
+    this.cookieService.deleteAll();
+  }
 }

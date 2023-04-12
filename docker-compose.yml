@@ -50,7 +50,7 @@ services:
       - POSTGRES_PORT=5432
     depends_on:
       - db
-  
+
   db:
     image: postgres
     container_name: db

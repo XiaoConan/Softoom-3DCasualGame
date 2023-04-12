@@ -82,6 +82,7 @@ export class ApiService {
 
   //signout
   signOut(): Observable<any> {
+    this.cookieService.delete('username');
     return this.http.get(`${this.endpoint}/users/logout`, {
       withCredentials: true,
     });
