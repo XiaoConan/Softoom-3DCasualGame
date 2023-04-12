@@ -48,7 +48,8 @@ the feeling of living in a cozy and comfortable room. <br/>
 https://youtu.be/RDJMhaDrBFE
 
 ### APP Website
-
+(i.e.Deployed version worked on some basic functions, but not all features that my project can performs<br/>
+One strange thing is that the website works, but it responses veryveryvery slow, plz be patient waiting each http request)<br/>
 http://j.softoom.space
 
 ### Manually Set Up On localhost
