@@ -43,14 +43,23 @@ services:
     environment:
       - VIRTUAL_HOST=api.j.softoom.space
       - LETSENCRYPT_HOST=api.j.softoom.space
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=H1092387456M
+      - POSTGRES_DB=appData
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+    depends_on:
+      - db
+  
   db:
     image: postgres
+    container_name: db
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: H1092387456M
       POSTGRES_DB: appData
     ports:
-      - 5433:5433
+      - 5432:5432
     volumes:
       - ./pgdata:/var/lib/postgresql/data
