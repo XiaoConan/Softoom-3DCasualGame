@@ -41,10 +41,10 @@ export class SignInPageComponent implements OnInit {
         (user) => {
           this.error = '';
           if (user.user.gender === 'female') {
-            this.cookieService.set('username', user.user.username, undefined, '/', undefined, true, 'None');
+            this.cookieService.set('username', user.user.username);
             this.router.navigate(['/room/female']);
           } else {
-            this.cookieService.set('username', user.user.username, undefined, '/', undefined, true, 'None');
+            this.cookieService.set('username', user.user.username);
             this.router.navigate(['/room/male']);
           }
         },

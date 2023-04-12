@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 import { Stripe } from '@stripe/stripe-js';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Stripe } from '@stripe/stripe-js';
 export class ApiService {
   endpoint = 'https://api.j.softoom.space';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cookieService: CookieService) {}
 
   //user sign up
   signUp(
@@ -65,7 +66,8 @@ export class ApiService {
 
   //get user info from email
   getUser(): Observable<any> {
-    return this.http.get(`${this.endpoint}/users/me`, {
+    const cookie = this.cookieService.get('username');
+    return this.http.get(`${this.endpoint}/users/me/${cookie}`, {
       withCredentials: true,
     });
   }

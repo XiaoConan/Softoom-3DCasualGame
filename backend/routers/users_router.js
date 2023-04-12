@@ -41,14 +41,14 @@ usersRouter.post("/signin", async (req, res) => {
 });
 
 //get user info
-usersRouter.get("/me", async (req, res) => {
-  if (!req.cookies.username) {
+usersRouter.get("/me/:cookie", async (req, res) => {
+  if (!req.params.cookie) {
     return res.status(401).json({ error: "You are not authenticated." });
   }
 
   const user = await Users.findOne({
     where: {
-      username: req.cookies.username,
+      username: req.params.cookie,
     },
   });
   if (!user) {
