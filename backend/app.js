@@ -11,8 +11,8 @@ const PORT = 3000;
 export const app = express();
 
 const corsOptions = {
-  AccessControlAllowOrigin: "https://j.softoom.space",
-  AccessControlAllowCredentials: true,
+  origin: "https://j.softoom.space",
+  credentials: true,
 };
 app.use(cors(corsOptions));
 
